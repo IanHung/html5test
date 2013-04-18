@@ -20,6 +20,16 @@ body {
 
 }
 
+.relative {
+	margin-top:15px;
+	position: relative;
+}
+
+.bot {
+	position: absolute;
+
+}
+
 .fat {
 	padding-top: 160px;
 	padding-bottom: 160px;	
