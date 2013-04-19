@@ -132,6 +132,7 @@ INSTALLED_APPS = (
      'django.contrib.admindocs',
 	 'south',
      'basePages',
+     'forum',
 )
 
 # A sample logging configuration. The only tangible logging
