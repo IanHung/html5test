@@ -13,4 +13,5 @@ class Comment(models.Model):
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey()
     comments = generic.GenericRelation('self')
-    
+  
+#admin class for posters
