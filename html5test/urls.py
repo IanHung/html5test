@@ -10,6 +10,8 @@ urlpatterns = patterns('',
     url(r'^$', 'basePages.views.home', name='home'),
     # url(r'^html5test/', include('html5test.foo.urls')),
 
+    url(r'^space/$', 'space.views.index', name='spaceview'),
+
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

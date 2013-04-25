@@ -133,7 +133,7 @@ INSTALLED_APPS = (
 	 'south',
      'basePages',
      'forum',
-     'registration',
+     'space',
 )
 
 # A sample logging configuration. The only tangible logging
