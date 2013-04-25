@@ -1,8 +1,45 @@
 {% extends "base.html" %}
 
+<<<<<<< HEAD
 {% block content %}
 
 	        <div class="row">
+=======
+{% block head %}
+    <script>
+      // ensure the web page (DOM) has loaded
+      document.addEventListener("DOMContentLoaded", function () {
+ 
+           // Create a popcorn instance by calling the Youtube player plugin
+         var example = Popcorn.youtube(
+           '#video',
+           'http://www.youtube.com/watch?v=sod-eJBf9Y0' );
+ 
+         // add a footnote at 2 seconds, and remove it at 6 seconds
+         example.footnote({
+           start: 2,
+           end: 30,
+           text: "Pop!",
+           target: "footnotediv"
+         });
+         
+         example.footnote({
+           start: 20,
+           end: 130,
+           text: "Pop!2",
+           target: "footnotediv2"
+         });
+ 
+         // play the video right away
+         example.play();
+ 
+      }, false);
+    </script>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+>>>>>>> dev
 	        	<div class="container">
 	        		<h1>Underscore_ Relativity. <small>Presents</small></h1>
 	        	</div>	           
@@ -14,6 +51,11 @@
 				</div>
 
             <!-- Example row of columns -->
+<<<<<<< HEAD
+=======
+            
+            
+>>>>>>> dev
      		<div class="row text-center shaded">
      			
      			<h3>Move your content beyond the page.</h3>
@@ -58,8 +100,32 @@
      		</div>
      		
      		<div class="row shaded">
+<<<<<<< HEAD
      			<div class="container fat">
      				<h1>In this section we explain how this makes videos(time-like objects) better using a picture!</h1>
+=======
+     			<div class="container">
+     				<h1>In this section we explain how this makes videos(time-like objects) better using a picture!</h1>
+						 <div class="container">
+						 	<div class="row">
+						 		<div class="span8">
+						 			<h1>TEST VIDEO</h1>
+						 			<div class="timelikevideo" id="video">
+						 			</div>
+						 			
+						 		</div>
+							</div>
+							<div class="row">
+								<div class="span8 well">
+									<div class="timelikecomment">
+										<p>Test</p>
+										<h1 id="footnotediv"></h1>
+										<h1 id="footnotediv2"></h1>
+									</div>
+								</div>
+						 	</div>
+						 </div>
+>>>>>>> dev
      			</div>	
      		</div>
      		
@@ -67,6 +133,10 @@
      			<div class="container fat">
      				<h1>Examples (city of science), closing statements, follow us on whatever.</h1>
      			</div>	
+<<<<<<< HEAD
      		</div>     				
 
+=======
+     		</div>
+>>>>>>> dev
 {% endblock %}

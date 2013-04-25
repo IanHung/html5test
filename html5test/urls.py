@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'basePages.views.home', name='home'),
     # url(r'^html5test/', include('html5test.foo.urls')),
+    url(r'^time/$', 'timeview.views.index', name='time'),
 
     url(r'^space/$', 'space.views.index', name='spaceview'),
 
