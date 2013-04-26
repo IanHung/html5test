@@ -1,0 +1,17 @@
+{% if not forloop.last %}{% ifequal forloop.revcounter 2 %}{% else %}, {% endifequal %}{% else %}{% endif %}
+
+
+ 		 var sequence = Popcorn.sequence(
+ 		 	"testid", 		 	
+ 		 	[
+ 		 	{% for Timelike in timelike_list %}	
+ 		  		{
+ 		  			src:'{{ Timelike.youtubesource }}'
+ 		  		}{% include "comma.html" %}
+ 		 	{% endfor %}
+ 			 
+    	  ]);
+ 		 
+ 		 sequence.play();
+ 		 
+until I can figure out how sequence works
