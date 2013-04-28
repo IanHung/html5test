@@ -8,15 +8,21 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'Timelike.author'
-        db.add_column(u'timeview_timelike', 'author',
-                      self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True),
-                      keep_default=False)
+        # Adding model 'Timelike'
+        db.create_table(u'timeview_timelike', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('title', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('author', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True)),
+            ('localsource', self.gf('django.db.models.fields.files.FileField')(max_length=100, blank=True)),
+            ('youtubesource', self.gf('django.db.models.fields.URLField')(max_length=200, blank=True)),
+            ('vimeosource', self.gf('django.db.models.fields.URLField')(max_length=200, blank=True)),
+        ))
+        db.send_create_signal(u'timeview', ['Timelike'])
 
 
     def backwards(self, orm):
-        # Deleting field 'Timelike.author'
-        db.delete_column(u'timeview_timelike', 'author_id')
+        # Deleting model 'Timelike'
+        db.delete_table(u'timeview_timelike')
 
 
     models = {

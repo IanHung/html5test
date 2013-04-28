@@ -8,15 +8,23 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'Timelike.author'
-        db.add_column(u'timeview_timelike', 'author',
-                      self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True),
+        # Adding field 'Comment.start'
+        db.add_column(u'forum_comment', 'start',
+                      self.gf('django.db.models.fields.PositiveIntegerField')(default=1, blank=True),
+                      keep_default=False)
+
+        # Adding field 'Comment.end'
+        db.add_column(u'forum_comment', 'end',
+                      self.gf('django.db.models.fields.PositiveIntegerField')(default=1, blank=True),
                       keep_default=False)
 
 
     def backwards(self, orm):
-        # Deleting field 'Timelike.author'
-        db.delete_column(u'timeview_timelike', 'author_id')
+        # Deleting field 'Comment.start'
+        db.delete_column(u'forum_comment', 'start')
+
+        # Deleting field 'Comment.end'
+        db.delete_column(u'forum_comment', 'end')
 
 
     models = {
@@ -67,16 +75,7 @@ class Migration(SchemaMigration):
             'pubDate': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'start': ('django.db.models.fields.PositiveIntegerField', [], {'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '200'})
-        },
-        u'timeview.timelike': {
-            'Meta': {'object_name': 'Timelike'},
-            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'null': 'True', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'localsource': ('django.db.models.fields.files.FileField', [], {'max_length': '100', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'vimeosource': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
-            'youtubesource': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'})
         }
     }
 
-    complete_apps = ['timeview']
+    complete_apps = ['forum']
