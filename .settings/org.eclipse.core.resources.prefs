@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//forum/migrations/0001_initial.py=utf-8
 encoding//forum/migrations/0002_auto__add_field_comment_start__add_field_comment_end.py=utf-8
 encoding//timeview/migrations/0001_initial.py=utf-8
 encoding//timeview/migrations/0002_auto__add_field_timelike_author.py=utf-8

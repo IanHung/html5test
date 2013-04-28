@@ -12,6 +12,7 @@ class Comment(models.Model):
     comment = models.TextField()
     #setting up relationships for multiple model types
     content_type = models.ForeignKey(ContentType, blank=True, null=True)
+    #need to create a smarter object id that would work across object types.
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey()
     #Need to add relations to other models classes.
