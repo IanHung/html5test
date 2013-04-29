@@ -8,18 +8,23 @@
  		{% for Timelike in timelike_list %}	
  		
            // Create a popcorn instance by calling the Youtube player plugin
-         var {{ Timelike.title }} = Popcorn.youtube(
-           "#video{{ Timelike.title }}",
+         var time{{ Timelike.id }} = Popcorn.youtube(
+           "#video{{ Timelike.id }}",
            '{{ Timelike.youtubesource }}' );
  
          // add a footnote at 2 seconds, and remove it at 6 seconds
-
- 
+		 {% for comment in Timelike.comment.all %}
+		 time{{ Timelike.id }}.footnote({
+		 	start: {{ comment.start }},
+		 	end: {{ comment.end }},
+		 	text: "{{ comment.comment }}",
+		 	target: "footnote{{ comment.id }}"
+		 });
+		 
+		 {% endfor %} 
          // play the video right away
-         {{ Timelike.title }}.play();
+         time{{ Timelike.id }}.play();
  		 {% endfor %}
-
-
  		 
       }, false);
       
@@ -33,12 +38,22 @@
 			 <div class="container">
 				 	<div class="row">
 				 		<div class="span8">
-				 			<h1>TEST VIDEO</h1>
-				 			<div class="timelikevideo" id="video{{ Timelike.title }}">
+				 			<h1>{{ Timelike.title }}</h1>
+				 			<div class="timelikevideo" id="video{{ Timelike.id }}">
 				 			</div>
 				 			
 				 		</div>
 					</div>
+					<div class="row">
+						<div class="span8 well">
+							<div class="timelikecomment">
+								{% for comment in Timelike.comment.all %}
+								<p>TEST</p>
+				 				<h1 id="footnote{{ comment.id }}"></h1>
+				 				{% endfor %}
+				 			</div>
+				 		</div>
+				 	</div>		
 				</div>							
 		{% endfor %}
 
