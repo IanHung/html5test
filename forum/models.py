@@ -21,4 +21,6 @@ class Comment(models.Model):
     start = models.PositiveIntegerField(blank=True)
     end = models.PositiveIntegerField(blank=True)
   
-#admin class for posters
+
+    def __str__(self):
+        return self.title
