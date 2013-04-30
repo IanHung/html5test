@@ -20,5 +20,8 @@ class Comment(models.Model):
     #start anchor and end anchor (end possibly not needed). Actually depends on type.
     start = models.PositiveIntegerField(blank=True)
     end = models.PositiveIntegerField(blank=True)
-  
+
+    def __str__(self):
+        return self.title
+    
 #admin class for posters

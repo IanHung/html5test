@@ -10,7 +10,7 @@
            // Create a popcorn instance by calling the Youtube player plugin
          var time{{ Timelike.id }} = Popcorn.smart(
            "#video{{ Timelike.id }}",
-           '{{ Timelike.youtubesource }}' );
+           {% if Timelike.localsource %} '{{ Timelike.localsource.url }}' {% else %}'{{ Timelike.youtubesource }}' {% endif %});
  
          // add a footnote at 2 seconds, and remove it at 6 seconds
 		 {% for comment in Timelike.comment.all %}
