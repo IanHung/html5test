@@ -8,7 +8,7 @@
  		{% for Timelike in timelike_list %}	
  		
            // Create a popcorn instance by calling the Youtube player plugin
-         var time{{ Timelike.id }} = Popcorn.youtube(
+         var time{{ Timelike.id }} = Popcorn.smart(
            "#video{{ Timelike.id }}",
            '{{ Timelike.youtubesource }}' );
  
@@ -23,7 +23,7 @@
 		 
 		 {% endfor %} 
          // play the video right away
-         time{{ Timelike.id }}.play();
+         /*time{{ Timelike.id }}.play();*/
  		 {% endfor %}
  		 
       }, false);
@@ -60,8 +60,8 @@
 						 			
 				 		</div>
 				 		<div class="span4 well col">
-				 				<ul class="nav nav-tabs">
-								  <li><a href="#text{{ Timelike.id }}" data-toggle="tab">Text</a></li>
+				 				<ul class="nav nav-pills black">
+								  <li class="active"><a href="#text{{ Timelike.id }}" data-toggle="tab">Text</a></li>
 								  <li><a href="#videos{{ Timelike.id }}" data-toggle="tab">Videos</a></li>
 								</ul>
 								<div class="tab-content">
