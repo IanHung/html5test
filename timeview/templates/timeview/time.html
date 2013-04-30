@@ -36,24 +36,49 @@
 	{% if timelike_list %}
 		{% for Timelike in timelike_list %}	
 			 <div class="container">
-				 	<div class="row">
+			 		<div class="row">
+			 			<div class="span12">
+			 				<h1>{{ Timelike.title }}</h1>
+			 			</div>
+			 		</div>	
+				 	<div class="row col-wrap">
 				 		<div class="span8">
-				 			<h1>{{ Timelike.title }}</h1>
+				 			
 				 			<div class="timelikevideo" id="video{{ Timelike.id }}">
 				 			</div>
-				 			
+						 	<div class="row">
+								<div class="span8 well">
+									<div class="timelikecomment">
+										{% for comment in Timelike.comment.all %}
+										{% if Timelike.author != comment.author %}
+						 					<h1 id="footnote{{ comment.id }}"></h1>
+							 			{% endif %}
+						 				{% endfor %}
+						 			</div>
+						 		</div>
+						 	</div>
+						 			
 				 		</div>
+				 		<div class="span4 well col">
+				 				<ul class="nav nav-tabs">
+								  <li><a href="#text{{ Timelike.id }}" data-toggle="tab">Text</a></li>
+								  <li><a href="#videos{{ Timelike.id }}" data-toggle="tab">Videos</a></li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane fade in active" id="text{{ Timelike.id }}">
+											{% for comment in Timelike.comment.all %}
+												{% if Timelike.author == comment.author %}
+						 					<h1 id="footnote{{ comment.id }}"></h1>
+							 			{% endif %}
+							 				{% endfor %}
+									</div>
+									<div class="tab-pane fade" id="videos{{ Timelike.id }}">
+									</div>
+								</div>	
+				 			</div>	
+				 		</div>	
 					</div>
-					<div class="row">
-						<div class="span8 well">
-							<div class="timelikecomment">
-								{% for comment in Timelike.comment.all %}
-								<p>TEST</p>
-				 				<h1 id="footnote{{ comment.id }}"></h1>
-				 				{% endfor %}
-				 			</div>
-				 		</div>
-				 	</div>		
+					
 				</div>							
 		{% endfor %}
 
