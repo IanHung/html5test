@@ -3,11 +3,9 @@
 {% load staticfiles %}
 
 {% block head %}
-	<script>
-	  $(function(){
-	    $(document).foundation();    
-	  })
-	</script>
+	<script type="text/javascript">
+		$('#exampleTooltip').tooltip();
+    </script>
 {% endblock %}
 
 {% block content %}
@@ -21,13 +19,6 @@
 	</div>
 </div>
 
-<div id="myModal" class="reveal-modal">
-  <h2>Awesome. I have it.</h2>
-  <p class="lead">Your couch.  It is mine.</p>
-  <p>Im a cool paragraph that lives inside of an even cooler modal. Wins</p>
-  <a class="close-reveal-modal">x</a>
-</div>
-
 <!-- the following article was taken from h+ magazine.
 	It contains a lot of text and two images.
 	I want to be able to comment on the text and on the images.
@@ -38,10 +29,10 @@
 	<div class="row">
 		<div class="small-6 columns" style="border-style:solid">
 			<p>
-				<a href="#" data-reveal-id="firstModal"><img class="alignnone" src="http://images2.wikia.nocookie.net/__cb20051121172739/uncyclopedia/images/1/13/The_Neitch.jpg" alt="" width="235" height="257" />
+				<a href="#myModal" data-toggle="modal"><img class="alignnone" src="http://images2.wikia.nocookie.net/__cb20051121172739/uncyclopedia/images/1/13/The_Neitch.jpg" alt="" width="235" height="257" />
 				</a>
-				</p>
-			<p>God is dead, said the man with the world's most exciting moustache. And many, seeing the dogma of ancient traditions as an anachronistic throwback to a time before the rise of reason, would seek to ensure that this process is completed as soon as possible.</p>
+			</p>
+			<p><a href="#" data-toggle="tooltip" title="blah">God is dead</a>, said the man with the world's most exciting moustache. And many, seeing the dogma of ancient traditions as an anachronistic throwback to a time before the rise of reason, would seek to ensure that this process is completed as soon as possible.</p>
 			<p>Theirs is a passionately futurist vision. The ancient ways must die, they believe, for new ways to come. And to them, the purpose of the scientist is to join in this crusade, and heap scorn and derision on religion, superstition, and the ancient ways.</p>
 			<p>A great deal of energy is expended in this endeavor  The militant tendency among atheists is on the rise, and understandably so.</p>
 			<p>Because it is undeniable that the ancient traditions are bursting at the seams with rigid thinking, blind belief and blinkered vision. Over the many centuries these traditions have calcified. Become closed and arrogant. Become the inverse of their founding insights, and serve now only to obscure what original insight brought them to life in the first place.</p>
@@ -84,6 +75,23 @@
 			<div>Ciaran Healy is an independent philosopher who uses the scientific method to chart the contour of human suffering and pain.  He works to discover new ways to undercut these things at source.  His aim is to bring these hidden dynamics to light with clarity and force for the general reader, and anyone up for looking at things in a new way.  He has been working at this for about 17 years, and amazingly, still loves it.  He lives in Edinburgh with his wife, and as he is unable to keep goldfish alive for long, it's just them for now.</div>
 		</div>
 	</div>
+</div>
+
+<!-- Button to trigger modal -->
+<!--<a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>-->
+ 
+<!-- Modal -->
+<div id="myModal" class="modal hide fade large" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+    <h3 id="myModalLabel">Blueprint, comment away</h3>
+  </div>
+  <div class="modal-body-large">
+  	<img class="alignnone" src="http://images.wikia.com/half-life/en/images/1/1a/Ashpd_blueprint_1.jpg" alt="" height="100%"/>
+  </div>
+  <div class="modal-footer">
+	<div><p>Here are some captions on the image</p></div>
+  </div>
 </div>
 
 <!-- Check for Zepto support, load jQuery if necessary -->
