@@ -133,7 +133,6 @@ INSTALLED_APPS = (
 	 'south',
      'basePages',
      'forum',
-     'registration',
      'space',
      'timeview',
 
