@@ -15,9 +15,10 @@
 
         <link rel="stylesheet" href="{% static 'initializr/css/bootstrap-responsive.min.css' %}">
         <link rel="stylesheet" href="{% static 'initializr/css/main.css' %}">
+        <link rel="stylesheet" href="{% static 'foundation4/css/foundation.css' %}">
         <link rel="stylesheet" href="{% static 'html5test/css/custom.css' %}">
         <script src="{%	static 'popcorn/js/popcorn-complete.min.js' %}"></script>
-
+		<script src="{%	static 'foundation4/js/foundation.min.js' %}"></script>
         <script src="{% static 'initializr/js/vendor/modernizr-2.6.2.min.js' %}"></script>
         {% block head %}{% endblock %}
     </head>
@@ -77,6 +78,8 @@
 
             <hr>
 
+	        {% block modal %}{% endblock %}
+
             <footer>
             	<div class="container">
                 	<p>&copy; Company 2013</p>
@@ -100,5 +103,6 @@
             g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>
+        
     </body>
 </html>
