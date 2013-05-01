@@ -51,14 +51,13 @@
 		 time{{ Timelike.id }}.footnote({
 		 	start: {{ comment.start }},
 		 	end: 300,
-		 	text: "{{ comment.comment }}",
+		 	text: "{{ comment.start }} {{ comment.comment }}",
 		 	target: "video{{ Timelike.id }}transcript{{ comment.id }}"
 		 	
 		 });			 
 		 {% endfor %}
 		 
 
-         // play the video right away
 		 {% endif %}
  		 {% endfor %}
  		 
