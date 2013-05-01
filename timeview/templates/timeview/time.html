@@ -5,28 +5,64 @@
     <script>
       // ensure the web page (DOM) has loaded
       document.addEventListener("DOMContentLoaded", function () {
+      	
+      	//Due to the way DOMContentLoaded works we have to break up the for loop into 2 parts 
  		{% for Timelike in timelike_list %}	
  		
            // Create a popcorn instance by calling the Youtube player plugin
-         var time{{ Timelike.id }} = Popcorn.smart(
+         var time{{ Timelike.id }} = Popcorn.youtube(
            "#video{{ Timelike.id }}",
-           '{{ Timelike.youtubesource }}' );
- 
-         // add a footnote at 2 seconds, and remove it at 6 seconds
+           "{{ Timelike.youtubesource }}" );
+          {% endfor %}
+          
+          
+     
+ 		{% for Timelike in timelike_list %}
+ 		
+ 		{% if Timelike.comment.all %}
+ 		time{{ Timelike.id }}.footnote({
+		 	start: 0.00000001,
+		 	text: '<div class="row"><div class="span8 well"><div class="timelikecomment">{% for comment in Timelike.comment.all %}{% if Timelike.author != comment.author %}<h1 id="video{{ Timelike.id }}footnote{{ comment.id }}"></h1>{% endif %}{% endfor %}</div></div></div>',
+		 	target: "subtitle{{ Timelike.id }}"
+		 });
+		 
+
+		  time{{ Timelike.id }}.footnote({
+		 	start: 0.00000001,
+		 	text: '<div class="span4 well col"><div class="row text-center"><ul class="nav nav-pills black center-pills"><li class="active"><a href="#text{{ Timelike.id }}" data-toggle="tab">Text</a></li><li><a href="#transcript{{ Timelike.id }}" data-toggle="tab">Transcript</a></li></ul></div><div class="tab-content"><div class="tab-pane fade in active" id="text{{ Timelike.id }}">{% for comment in Timelike.comment.all %}{% if Timelike.author == comment.author %}<h1 id="video{{ Timelike.id }}footnote{{ comment.id }}"></h1>{% endif %}{% endfor %}</div><div class="tab-pane fade" id="transcript{{ Timelike.id }}">{% for comment in Timelike.comment.all %}<h1 id="video{{ Timelike.id }}transcript{{ comment.id }}"></h1>{% endfor %}</div></div></div>',
+		 	target: "sidemenu{{ Timelike.id }}"
+		 });
+
+
+
+            	
+         
 		 {% for comment in Timelike.comment.all %}
+	
+
+		 
 		 time{{ Timelike.id }}.footnote({
 		 	start: {{ comment.start }},
 		 	end: {{ comment.end }},
 		 	text: "{{ comment.comment }}",
-		 	target: "footnote{{ comment.id }}"
+		 	target: "video{{ Timelike.id }}footnote{{ comment.id }}"
 		 });
 		 
-		 {% endfor %} 
+		 time{{ Timelike.id }}.footnote({
+		 	start: {{ comment.start }},
+		 	end: 300,
+		 	text: "{{ comment.comment }}",
+		 	target: "video{{ Timelike.id }}transcript{{ comment.id }}"
+		 	
+		 });			 
+		 {% endfor %}
+		 
+
          // play the video right away
-         /*time{{ Timelike.id }}.play();*/
+		 {% endif %}
  		 {% endfor %}
  		 
-      }, false);
+      }, true);
       
     </script>
     {% endif %}
@@ -46,40 +82,15 @@
 				 			
 				 			<div class="timelikevideo" id="video{{ Timelike.id }}">
 				 			</div>
-						 	<div class="row">
-								<div class="span8 well">
-									<div class="timelikecomment">
-										{% for comment in Timelike.comment.all %}
-										{% if Timelike.author != comment.author %}
-						 					<h1 id="footnote{{ comment.id }}"></h1>
-							 			{% endif %}
-						 				{% endfor %}
-						 			</div>
-						 		</div>
-						 	</div>
+						 	<div id="subtitle{{ Timelike.id }}"></div>
 						 			
 				 		</div>
-				 		<div class="span4 well col">
-				 				<ul class="nav nav-pills black">
-								  <li class="active"><a href="#text{{ Timelike.id }}" data-toggle="tab">Text</a></li>
-								  <li><a href="#videos{{ Timelike.id }}" data-toggle="tab">Videos</a></li>
-								</ul>
-								<div class="tab-content">
-									<div class="tab-pane fade in active" id="text{{ Timelike.id }}">
-											{% for comment in Timelike.comment.all %}
-												{% if Timelike.author == comment.author %}
-						 					<h1 id="footnote{{ comment.id }}"></h1>
-							 			{% endif %}
-							 				{% endfor %}
-									</div>
-									<div class="tab-pane fade" id="videos{{ Timelike.id }}">
-									</div>
-								</div>	
-				 			</div>	
-				 		</div>	
-					</div>
+						<div id="sidemenu{{ Timelike.id }}"></div>
 					
-				</div>							
+		 			</div>	
+			</div>
+					
+						
 		{% endfor %}
 
 	{% endif %}

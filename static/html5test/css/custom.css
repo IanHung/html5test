@@ -97,3 +97,7 @@ padding-bottom:-20px
 .black a {
 	color: black;
 }
+
+/*Centring nav pills*/
+
+.center-pills { display: inline-block; }

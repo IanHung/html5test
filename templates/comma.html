@@ -15,3 +15,12 @@
  		 sequence.play();
  		 
 until I can figure out how sequence works
+
+end: {{ comment.end }},
+
+		 
+		 time{{ Timelike.id }}.footnote({
+		 	start: 1,
+		 	text: '<div class="row"><div class="span8 well"><div class="timelikecomment">{% for comment in Timelike.comment.all %}{% if Timelike.author != comment.author %}<h1 id="footnote{{ comment.id }}"></h1>{% endif %}{% endfor %}</div></div></div>',
+		 	target: "subtitle{{ Timelike.id }}"
+		 });
