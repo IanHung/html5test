@@ -20,10 +20,22 @@ class Comment(models.Model):
     #start anchor and end anchor (end possibly not needed). Actually depends on type.
     start = models.PositiveIntegerField(blank=True)
     end = models.PositiveIntegerField(blank=True)
+    #Enrichment comment or just a basic comment.
+    isBasic = models.BooleanField(default=True)
   
 
     def __str__(self):
         return self.title
+    
+    #added a method that will allow me to limit the number of comments that can appear at once, where num is the number of comments that appear.
+    #I should probably make this a filter instead of a method. 
+    def get_later_start(self):
+        num = 1
+        later = Comment.objects.filter(isBasic=True,content_type=self.content_type, object_id=self.object_id ,start__gt=self.start).order_by('start')
+        if later:
+            return min(later[num-1].start, self.end)
+        return False
+        
     
     class Meta:
         ordering = ["-start"]
