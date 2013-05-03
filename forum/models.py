@@ -22,11 +22,10 @@ class Comment(models.Model):
     end = models.PositiveIntegerField(blank=True)
     #Enrichment comment or just a basic comment.
     isBasic = models.BooleanField(default=True)
-  
 
     def __str__(self):
         return self.title
-    
+
     #added a method that will allow me to limit the number of comments that can appear at once, where num is the number of comments that appear.
     #I should probably make this a filter instead of a method. 
     def get_later_start(self):
@@ -39,3 +38,4 @@ class Comment(models.Model):
     
     class Meta:
         ordering = ["-start"]
+#admin class for posters
