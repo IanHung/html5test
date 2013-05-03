@@ -8,6 +8,8 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'basePages.views.home', name='home'),
+    # url()
+    url(r'^test/$', 'forum.views.PostComment', name='comment'),
     # url(r'^html5test/', include('html5test.foo.urls')),
     url(r'^time/$', 'timeview.views.index', name='timeview'),
 
