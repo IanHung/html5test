@@ -1,14 +1,125 @@
 {% extends "base.html" %}
 
+{% load staticfiles %}
+
+{% block head %}
+	<script type="text/javascript">
+		$('#exampleTooltip').tooltip();
+    </script>
+{% endblock %}
+
 {% block content %}
 
 <div class="container">
 	<div class="row">
-		<div class="span12">
+		<div class="small-12 columns">
 			<p>Tests for space like objects</p>
+			<a href="#" data-reveal-id="myModal">Click Me For A Modal</a>
 		</div>
 	</div>
 </div>
 
+<!-- the following article was taken from h+ magazine.
+	It contains a lot of text and two images.
+	I want to be able to comment on the text and on the images.
+	I also want an image that I can click to open a larger window for it.
+-->
+
+<div class="container">
+	<div class="row">
+		<div class="span6" style="border-style:solid">
+			<p>
+				<a href="#myModal" data-toggle="modal"><img class="alignnone" src="http://images2.wikia.nocookie.net/__cb20051121172739/uncyclopedia/images/1/13/The_Neitch.jpg" alt="" width="235" height="257" />
+				</a>
+			</p>
+			<div class="imgcontainer">
+				<div class="row">
+					<div class="span8">
+						<a href="#" class="imagehover"><img class="alignnone" src="http://images2.wikia.nocookie.net/__cb20051121172739/uncyclopedia/images/1/13/The_Neitch.jpg" alt="" width="235" height="257" />
+						</a>
+					</div>
+					<div class="span4" id="imgtrig">
+						<button class="btn">modal</button>
+						<button class="btn">comment</button>
+					</div>
+				</div>
+			</div>
+			<p><a href="#" data-toggle="tooltip" title="blah">God is dead</a>, said the man with the world's most exciting moustache. And many, seeing the dogma of ancient traditions as an anachronistic throwback to a time before the rise of reason, would seek to ensure that this process is completed as soon as possible.</p>
+			<p>Theirs is a passionately futurist vision. The ancient ways must die, they believe, for new ways to come. And to them, the purpose of the scientist is to join in this crusade, and heap scorn and derision on religion, superstition, and the ancient ways.</p>
+			<p>A great deal of energy is expended in this endeavor  The militant tendency among atheists is on the rise, and understandably so.</p>
+			<p>Because it is undeniable that the ancient traditions are bursting at the seams with rigid thinking, blind belief and blinkered vision. Over the many centuries these traditions have calcified. Become closed and arrogant. Become the inverse of their founding insights, and serve now only to obscure what original insight brought them to life in the first place.</p>
+			<p>The refusal to allow any serious consideration of ideas that shake the foundations of belief is a classic hallmark of religious blindness. Science stands in stark contrast to this. It does not merely allow the consideration of ideas that shake its foundations. Science is the search for ideas that shake foundations.</p>
+			<p>All ideas and beliefs are meat for the grinder, and that grinder is reality. Throw it all in, all of it. The more precious the hope, the more important the testing, and the ruthlessness of the testing, so that we are not fooled as we have been for so long.</p>
+			<p>This represents a genuinely new way of dealing with knowledge and with belief. It generates insight of such accuracy and precision that it has fundamentally changed the nature of human life, and perhaps one day, the very meaning of humanity itself.</p>
+			<p>But before that promise can be fulfilled, there are deeper mysteries than mankind must dare to know.</p>
+			<p>Chief among these is the fundamental nature of humanity. And it is no idle dreaming, or academic curiosity that drives this search. It is something far deeper, and made only more urgent by the advance of science, and mastery over the external world.</p>
+			<p>It is this -- that humanity has not shown itself a wise custodian of the great advances it has made. Einstein once searingly wrote:</p>
+			<p style="padding-left: 30px;"><em>"Technological progress is like an axe in the hands of a pathological criminal."</em></p>
+			<p>And external technology does indeed have this quality to it. We are giving more power to an unreconstructed ape, with little ape concerns, little ape vendettas, and a little ape ego to protect at all costs.</p>
+			<p>External technology. External discovery. And it is the external aspect of science which has been stunningly successful. When it comes to the deeps of humanity, the fundamental structure of human nature, the origin of cruelty and suffering, the dynamics of openness, hope, joy and creativity -- these are things which science has been stunningly poor at charting.</p>
+			<p>Oh, of course, we have data. We have lots and lots of data. But again, to come back to Einstein,</p>
+			<p style="padding-left: 30px;"><em>"Data is not knowledge.""</em></p>
+			<p><img class="alignnone" src="http://media.npr.org/assets/img/2012/03/19/einstein-75dffc8af00c56b1cf93b7058f15af1360ac6bca-s6-c10.jpg" alt="" width="569" height="427" /></p>
+			<p>To generate true knowledge you can't just collect data, hoping it will reach a critical mass and tell you what you need to know. You have to do what only humans can do, and get inside it, understand it. You have to make daring speculations that bring it all together. You have to leave your preconceptions behind, and all the things you want to believe. You have to imagine what it could all mean, and then test your imaginings, and watch them fail, and see how they fail, because seeing that leads you deeper still.</p>
+			<p>More than any of this, you have to stare into the dark, and the real possibility that underneath our masks of reason, there is nothing in humans worth finding, or worse -- that what you will find will be genuinely horrendous, and that knowledge of our true nature will blank out all hope in our lives.</p>
+			<p>This, I believe, is why it is that we collect data, and data, and yet more data but flinch from the deep conjectures that might make sense of it. We are afraid of what we might see. What it would mean. This is why science has failed to match its incredible advances in the external world with similar ones in the internal.</p>
+			<p>Fear.</p>
+			<p>But that's not necessarily a bad thing. Because the good news is this -- the scientific method has no internal barrier to opening up a new understanding of humanity. The only reason the barrier exists is because we want it to, because we are afraid, and find it easy to dress that fear up in pretty clothes, and many excuses, all of which sound very reasonable and very clever, and distract from one little thing that might perhaps be of interest to a certain kind of person.</p>
+			<p>There is a journey as yet untravelled.</p>
+			<p>And for that journey, science must move beyond the cheap mockery of superstition. Because at the heart of all the ancient wisdom traditions, cloaked beneath centuries of mysticism and dogma, there seems to lie a very striking convergence.</p>
+			<p>They all meet in similar descriptions of some internal process. Something that forever frees them from the chains of human nature. Underneath all their bickering and wars, and the differences between them which they suspiciously love to emphasise, there is a striking convergence in the matter of transcending suffering, and opening up a new way of life.</p>
+			<p>I believe it is no longer enough to ask of the ancient traditions Are these superstitions true, as they are advanced by organised religion?</p>
+			<p>That question has been settled. The answer is no.</p>
+			<p>A deeper, far more scientific, and far more daring question is this.</p>
+			<p>"Is there an actual reality to which all these superstitions can be said to refer?"</p>
+			<p>Religion has failed. But it has not failed because it has no substance. It has failed because it has abandoned that substance for the sake of false certainty, cowardice, rigid thinking, power, superficiality, status and show.</p>
+			<p>It has failed globally, because of the very problem of human nature the original insights sought to address. The cheap, weak, petty and divided nature of the human animal.</p>
+			<p>So, what are we to do? Are we to respond to this by pouring derision upon that failure?</p>
+			<p>Or are we to succeed where religion has failed?</p>
+			<p>Science generates clarity that is way beyond anything that humans have ever had access to. If it can move beyond the failings of the religions it holds in such low regard, and take seriously the potential reality that underlies every wisdom tradition, then perhaps it can open deep truth up in a way that has never before been possible. And in that opening, make a new kind of world possible. A new kind of human. A better one.</p>
+			<p>And this is the new frontier, the greatest frontier. The deepest, and most intimate. The most dangerous, with a prize beyond imagining. A new option for any brave enough to take it, to live a life free of hollow, petty emptiness and needless cruelty. And wide open with possibilities that, for now, we cannot even comprehend.</p>
+			<p>But science is not magic. And this will not happen by chance. It does have an admission fee. Science is work.</p>
+			<p>You will need to support it, and spread it, and more than all this, you have to dare.</p>
+			<p>You have to dare to know.</p>
+			<p>Many will not. The majority will not. But I sincerely hope you do. It's a hell of a rush.</p>
+			<div>###</div>
+			<div></div>
+			<div>Ciaran Healy is an independent philosopher who uses the scientific method to chart the contour of human suffering and pain.  He works to discover new ways to undercut these things at source.  His aim is to bring these hidden dynamics to light with clarity and force for the general reader, and anyone up for looking at things in a new way.  He has been working at this for about 17 years, and amazingly, still loves it.  He lives in Edinburgh with his wife, and as he is unable to keep goldfish alive for long, it's just them for now.</div>
+		</div>
+	</div>
+</div>
+
+<!-- Button to trigger modal -->
+<!--<a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>-->
+ 
+<!-- Modal -->
+<div id="myModal" class="modal hide fade large" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+    <h3 id="myModalLabel">Blueprint, comment away</h3>
+  </div>
+  <div class="modal-body-large">
+  	<img class="alignnone" src="http://images.wikia.com/half-life/en/images/1/1a/Ashpd_blueprint_1.jpg" alt="" height="100%"/>
+  </div>
+  <div class="modal-footer">
+	<div><p>Here are some captions on the image</p></div>
+  </div>
+</div>
+
+<!-- Check for Zepto support, load jQuery if necessary -->
+<script>
+  document.write('<script src=/static/foundation4/js/vendor/'
+    + ('__proto__' in {} ? 'zepto' : 'jquery')
+    + '.js><\/script>');
+</script>
+
 {% endblock %}
 
+{% block modal %}
+<div id="firstModal" class="reveal-modal">
+  <h2>This is a modal.</h2>
+  <p>Reveal makes these very easy to summon and dismiss. The close button is simply an anchor with a unicode character icon and a class of <code>close-reveal-modal</code>. Clicking anywhere outside the modal will also dismiss it.</p>
+  <p>Finally, if your modal summons another Reveal modal, the plugin will handle that for you gracefully.</p>
+  <a class="close-reveal-modal">x</a>
+</div>
+{% endblock %}
