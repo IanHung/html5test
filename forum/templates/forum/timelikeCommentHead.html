@@ -17,7 +17,7 @@
 				var contenttypePost{{ Timelike.id }} = '&content_type=10';
 				var isBasicPost{{ Timelike.id }} = '&isBasic=on';
 			
-				var totalData = $(this).serialize() +"&parameter=param1" +  endPost{{ Timelike.id }} + authorPost{{ Timelike.id }} + titlePost{{ Timelike.id }} + objectidPost{{ Timelike.id }} + startPost{{ Timelike.id }} + contenttypePost{{ Timelike.id }}+isBasicPost{{ Timelike.id }};
+				var totalData = $(this).serialize() +  endPost{{ Timelike.id }} + authorPost{{ Timelike.id }} + titlePost{{ Timelike.id }} + objectidPost{{ Timelike.id }} + startPost{{ Timelike.id }} + contenttypePost{{ Timelike.id }}+isBasicPost{{ Timelike.id }};
 				
 				$.ajax({
 					url:"{% url 'timeview' %}",

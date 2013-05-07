@@ -9,8 +9,8 @@ def PostComment(request):
         print(request.POST)
         message = 'something wrong!'
         if(form.is_valid()):
-            print(request.POST)
-            message = request.POST['title']
+            print(form)
+            form.save()
 
         return HttpResponse(json.dumps({'message': message}))
 

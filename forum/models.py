@@ -18,8 +18,8 @@ class Comment(models.Model):
     #Need to add relations to other models classes.
     comments = generic.GenericRelation('self')
     #start anchor and end anchor (end possibly not needed). Actually depends on type.
-    start = models.PositiveIntegerField(blank=True)
-    end = models.PositiveIntegerField(blank=True)
+    start = models.FloatField(blank=True)
+    end = models.FloatField(blank=True)
     #Enrichment comment or just a basic comment.
     isBasic = models.BooleanField(default=True)
   
