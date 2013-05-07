@@ -1,19 +1,18 @@
 # Create your views here.
 import json
-from django.shortcuts import *
-from django.template import RequestContext
+from django.shortcuts import render, HttpResponse
 from forum.forms import CommentForm
 
 def PostComment(request):
     if request.method == "POST":
         form = CommentForm(request.POST)
-
+        print(request.POST)
         message = 'something wrong!'
         if(form.is_valid()):
-            print(request.POST['title'])
+            print(request.POST)
             message = request.POST['title']
 
         return HttpResponse(json.dumps({'message': message}))
 
-    return render_to_response('forum/comment.html',
-            {'form':CommentForm()}, RequestContext(request))
+    return render(request, 'forum/comment.html',
+            {'form':CommentForm()})

@@ -1,0 +1,43 @@
+
+			$('input.comment').on('keyup', function() {
+			  $(this).next('.mybtn').click();
+			});
+			{% for Timelike in timelike_list %}		
+			$('#form{{ Timelike.id }}').submit(function(event{{ Timelike.id }}) {
+				//do some form cleaning here
+				
+				var end{{ Timelike.id }} = time{{ Timelike.id }}.currentTime()+5;
+				var endPost{{ Timelike.id }} = '&end=' + end{{ Timelike.id }};
+				var authorPost{{ Timelike.id }} = '&author=1';				
+				var titlePost{{ Timelike.id }} = '&title=something';
+				
+				var objectidPost{{ Timelike.id }} = '&object_id={{ Timelike.id }}';
+				var start{{ Timelike.id }} = time{{ Timelike.id }}.currentTime() + 1;
+				var startPost{{ Timelike.id }} = '&start=' + start{{ Timelike.id }};
+				var contenttypePost{{ Timelike.id }} = '&content_type=10';
+				var isBasicPost{{ Timelike.id }} = '&isBasic=on';
+			
+				var totalData = $(this).serialize() +"&parameter=param1" +  endPost{{ Timelike.id }} + authorPost{{ Timelike.id }} + titlePost{{ Timelike.id }} + objectidPost{{ Timelike.id }} + startPost{{ Timelike.id }} + contenttypePost{{ Timelike.id }}+isBasicPost{{ Timelike.id }};
+				
+				$.ajax({
+					url:"{% url 'timeview' %}",
+					data: totalData,
+					type: "POST",
+					dataType: "json",
+					success: function( data{{ Timelike.id }} ) {
+						alert("Something is working");
+					},
+					
+					error: function( xhr, status ) {
+						alert("Sorry, there was a problem!");
+					},
+					
+					complete: function( xhr, status ) {
+						alert("The request is complete!");
+					},
+										
+				});
+				event{{ Timelike.id }}.preventDefault();
+			});
+			{% endfor %}
+					

@@ -1,0 +1,36 @@
+<script type="text/javascript">
+		
+		$( document ).ready(function() {
+			//Submit comment with enter
+			$('input.comment').on('keyup', function() {
+			  $(this).next('.mybtn').click();
+			});
+			
+			$( '#form{{ Timelike }}').submit(function(event){
+				//do some form cleaning here
+				$.ajax({
+					url:"/test/",
+					data: $(this).serialize()+'&parameter=param1',
+					type: "POST",
+					dataType: "json",
+					success: function( json ) {
+
+						$('.message2').html(json.message);
+						alert("Something is working");
+					},
+					
+					error: function( xhr, status ) {
+						alert("Sorry, there was a problem!");
+					},
+					
+					complete: function( xhr, status ) {
+						alert("The request is complete!");
+					}
+					
+				});
+				event.preventDefault();
+			});
+		
+			
+		});
+</script>	
