@@ -33,9 +33,19 @@ class Comment(models.Model):
         num = 1
         later = Comment.objects.filter(isBasic=True,content_type=self.content_type, object_id=self.object_id ,start__gt=self.start).order_by('start')
         if later:
-            return min(later[num-1].start, self.end)
+            return max(min(later[num-1].start, self.end), self.start +1)
         return False
-        
+    
+    def get_earlier_id(self):
+        later = Comment.objects.filter(isBasic=True,content_type=self.content_type, object_id=self.object_id ,start__lte=self.start).exclude(id=self.id).order_by('-start')
+        if later:
+            return later[0].id
+        return self.id
+    
+    def singlejson(self):
+        #need to set up user login 'author' : self.author.username, need to do something with pubdate 'pubDate' : self.pubDate,
+        sjson = {'id' : self.id, 'title' : self.title, 'comment' : self.comment, 'content_type' : self.content_type.name, 'object_id' : self.object_id, 'start' : self.start, 'end' : self.end, 'isBasic' : self.isBasic, 'previd' : self.get_earlier_id()}
+        return sjson
     
     class Meta:
         ordering = ["-start"]

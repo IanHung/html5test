@@ -37,10 +37,14 @@
 			 {% endif %}
 			 time{{ Timelike.id }}.footnote({
 			 	start: {{ comment.start }},
-			 	end: 300,
-			 	text: "{{ comment.start }} {{ comment.comment }}",
+			 	text: Math.floor({{ comment.start }})+ "s "+ "{{ comment.comment }}",
 			 	target: "video{{ Timelike.id }}transcript{{ comment.id }}"
 			 	
+			 });
+
+			 $("#video{{ Timelike.id }}transcript{{ comment.id }}").click(function(){
+			 			time{{ Timelike.id }}.play();
+			 			time{{ Timelike.id }}.currentTime( {{ comment.start }} );
 			 });			 
 			 {% endfor %}
 			 {% endif %}

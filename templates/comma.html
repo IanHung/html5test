@@ -46,3 +46,10 @@ end: {{ comment.end }},
 
 		$("div").css("border", "3px solid red");
 				event{{ Timelike.id }}.preventDefault();
+				
+time{{ Timelike.id }}.footnote({
+						 	start: data{{ Timelike.id }}.start,
+						 	end: data{{ Timelike.id }}.end,
+						 	text: data{{ Timelike.id }}.comment,
+						 	target: contain{{ Timelike.id }},
+					 	});

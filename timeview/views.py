@@ -11,11 +11,9 @@ def index(request):
     timelike_list = Timelike.objects.order_by('title')
     if request.method == "POST":
         commentform = CommentForm(request.POST)
-        print(commentform)
-        print(request.POST)
         message = {'message': 'something wrong!'} 
+        print(request.POST)
         if(commentform.is_valid()):
-            print(commentform.is_valid())
             comment=commentform.save(commit=False)
             comment.end=request.POST['end']
             comment.start=request.POST['start']
@@ -24,6 +22,9 @@ def index(request):
             comment.content_type=ContentType.objects.get_for_model(Timelike)
             comment.isBasic=request.POST['isBasic']
             comment.save()
+            newComment = Comment.objects.latest('pubDate')
+            message = newComment.singlejson()
+            print(message)
         return HttpResponse(json.dumps(message))
     
     return render(request, 'timeview/time.html', {'timelike_list': timelike_list, 'form':CommentForm()})

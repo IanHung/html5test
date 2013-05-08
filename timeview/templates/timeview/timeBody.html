@@ -8,7 +8,7 @@
 			 			</div>
 			 		</div>	
 				 	<div class="row col-wrap">
-				 		<div class="span8">
+				 		<div class="span8 col1">
 				 			
 				 			<div class="timelikevideo" id="video{{ Timelike.id }}">
 				 			</div>
@@ -19,7 +19,7 @@
 						 					{% include 'forum/timelikeCommentBody.html' %}
 						 					{% for comment in Timelike.comment.all %}
 						 						{% if comment.isBasic %}
-						 						<h1 id='video{{ Timelike.id }}footnote{{ comment.id }}'></h1>
+						 						<h4 id='video{{ Timelike.id }}footnote{{ comment.id }}'></h4>
 						 						{% endif %}
 						 					{% endfor %}
 						 				</div>
@@ -28,27 +28,29 @@
 						 	</div>
 				 		</div>
 						<div id="sidemenu{{ Timelike.id }}">
-							<div class="span4 well col">
-								<div class="row text-center">
-									<ul class="nav nav-pills black center-pills">
-										<li class="active"><a href="#text{{ Timelike.id }}" data-toggle="tab">Text</a></li>
-										<li><a href="#transcript{{ Timelike.id }}" data-toggle="tab">Transcript</a></li>
-									</ul>
-								</div>
-								<div class="tab-content">
-									<div class="tab-pane fade in active" id="text{{ Timelike.id }}">
-										{% for comment in Timelike.comment.all %}
-											{% if not comment.isBasic %}
-												<h1 id="video{{ Timelike.id }}footnote{{ comment.id }}"></h1>
-											{% endif %}
-										{% endfor %}
+							<div class="span4 col2">
+								<div class="well">
+									<div class="row text-center">
+										<ul class="nav nav-pills black center-pills">
+											<li class="active"><a href="#text{{ Timelike.id }}" data-toggle="tab">Text</a></li>
+											<li><a href="#transcript{{ Timelike.id }}" data-toggle="tab">Transcript</a></li>
+										</ul>
 									</div>
-									<div class="tab-pane fade" id="transcript{{ Timelike.id }}">
-										{% for comment in Timelike.comment.all %}
-											<h1 id="video{{ Timelike.id }}transcript{{ comment.id }}"></h1>
-										{% endfor %}
+									<div class="tab-content">
+										<div class="tab-pane fade in active" id="text{{ Timelike.id }}">
+											{% for comment in Timelike.comment.all %}
+												{% if not comment.isBasic %}
+													<h4 id="video{{ Timelike.id }}footnote{{ comment.id }}"></h4>
+												{% endif %}
+											{% endfor %}
+										</div>
+										<div class="tab-pane fade" id="transcript{{ Timelike.id }}">{% spaceless %}
+											{% for comment in Timelike.comment.all %}
+												<h4 id="video{{ Timelike.id }}transcript{{ comment.id }}"></h4>
+											{% endfor %}
+										{% endspaceless %}</div>
 									</div>
-								</div>
+								</well>	
 							</div>
 						</div>
 		 			</div>	

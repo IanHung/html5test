@@ -39,6 +39,7 @@ body {
 
 .well {
 	 box-sizing: border-box;
+	 height:100%;
 }
 
 
@@ -62,16 +63,13 @@ body {
 
 .timelikecomment {
 	width: 100%;
-    height: 0;
-    padding-bottom: 20%;
+    height: 200px;
+
 }
 
 /*Normalizing column height using css*/
 
 .col{
-margin-bottom: -100%;
-padding-bottom: 100%;
-
 }
 
 
