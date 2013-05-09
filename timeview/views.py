@@ -8,7 +8,7 @@ from forum.forms import CommentForm
 from django.core import serializers
 
 def index(request):
-    timelike_list = Timelike.objects.order_by('title')
+    timelike_list = Timelike.objects.order_by('-pubDate')
     if request.method == "POST":
         commentform = CommentForm(request.POST)
         message = {'message': 'something wrong!'} 
