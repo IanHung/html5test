@@ -148,3 +148,7 @@ a {
   opacity: 1;
   filter: alpha(opacity=100);
 }
+
+.whitespace {
+	margin-right: 15px;
+}

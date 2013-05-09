@@ -5,16 +5,18 @@ from timeview.models import Timelike
 from forum.models import Comment
 from django.contrib.contenttypes.models import ContentType
 from forum.forms import CommentForm
-from django.core import serializers
+
 
 def index(request):
-    timelike_list = Timelike.objects.order_by('-pubDate')
+    timelike_list = Timelike.objects.order_by('-pubDate', '-id')
     if request.method == "POST":
         commentform = CommentForm(request.POST)
         message = {'message': 'something wrong!'} 
         print(request.POST)
         if(commentform.is_valid()):
             comment=commentform.save(commit=False)
+            if request.user.is_authenticated():
+                comment.author = request.user
             comment.end=request.POST['end']
             comment.start=request.POST['start']
             comment.title=request.POST['title']
