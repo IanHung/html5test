@@ -40,6 +40,8 @@ body {
 .well {
 	 box-sizing: border-box;
 	 height:100%;
+	 padding-right:0px;
+	 padding-bottom:0px;
 }
 
 
@@ -69,14 +71,7 @@ body {
 
 /*Normalizing column height using css*/
 
-.col{
-}
 
-
-.col-wrap{  
-overflow: hidden;
-padding-bottom:-20px   
-}
 
 .sidemenu{
 	width: 100%;
@@ -100,8 +95,56 @@ padding-bottom:-20px
 
 .center-pills { display: inline-block; }
 
-/*Comment Wrapper for comment submission*/
+/*Set up scroll bar for Transript*/
 
-.timelikecommentwrapper {
-	
+
+.col3{  
+	overflow: auto;
+	position: relative;
+	width:100%;
+
+}
+
+.dropdown-menu li > a:hover, .dropdown-menu li > a:focus {
+	background-color:gray;
+	background-image:none;
+}
+
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus  {
+	background-image:none;
+	background-color:black;
+	color: white;
+}
+
+a {
+	color: black;
+}
+
+
+
+.nav-pills > .active > a,
+.nav-pills > .active > a:hover,
+.nav-pills > .active > a:focus {
+	background:#000000;
+}
+
+.caret{
+	border-top: 4px solid gray;
+}
+
+.nav .active .dropdown-toggle .caret {
+  border-top-color: gray;
+  border-bottom-color: gray;
+}
+
+.nav li.dropdown.open .caret,
+.nav li.dropdown.open.active .caret,
+.nav li.dropdown.open a:hover .caret,
+.nav li.dropdown.open a:focus .caret {
+  border-top-color: gray;
+  border-bottom-color: gray;
+  opacity: 1;
+  filter: alpha(opacity=100);
 }

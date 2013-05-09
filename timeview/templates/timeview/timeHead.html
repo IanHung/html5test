@@ -41,11 +41,22 @@
 			 	target: "video{{ Timelike.id }}transcript{{ comment.id }}"
 			 	
 			 });
+			 
+			 time{{ Timelike.id }}.footnote({
+			 	start: 0,
+			 	text: Math.floor({{ comment.start }})+ "s "+ "{{ comment.comment }}",
+			 	target: "video{{ Timelike.id }}transcriptFull{{ comment.id }}"
+			 	
+			 });
 
 			 $("#video{{ Timelike.id }}transcript{{ comment.id }}").click(function(){
 			 			time{{ Timelike.id }}.play();
 			 			time{{ Timelike.id }}.currentTime( {{ comment.start }} );
-			 });			 
+			 });
+			 $("#video{{ Timelike.id }}transcriptFull{{ comment.id }}").click(function(){
+			 			time{{ Timelike.id }}.play();
+			 			time{{ Timelike.id }}.currentTime( {{ comment.start }} );
+			 });				 
 			 {% endfor %}
 			 {% endif %}
 	 		 {% endfor %}

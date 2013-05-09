@@ -31,15 +31,21 @@
 						var containtran{{ Timelike.id }} = "video" +data{{ Timelike.id }}.object_id + "transcript" + data{{ Timelike.id }}.id;
 						var containtranhtml{{ Timelike.id }} = '<h4 id="' + containtran{{ Timelike.id }} + '"></h4>';			
 						var prevhtml{{ Timelike.id }} = "#video" +data{{ Timelike.id }}.object_id + "transcript" + data{{ Timelike.id }}.previd;
+						var containtranFull{{ Timelike.id }} = "video" +data{{ Timelike.id }}.object_id + "transcriptFull" + data{{ Timelike.id }}.id;
+						var containtranFullhtml{{ Timelike.id }} = '<h4 id="' + containtranFull{{ Timelike.id }} + '"></h4>';
+						var prevFullhtml{{ Timelike.id }} = "#video" +data{{ Timelike.id }}.object_id + "transcriptFull" + data{{ Timelike.id }}.previd;	
 						$("#subtitle{{ Timelike.id }}").find('.timelikecomment').append(containhtml{{ Timelike.id }});
 						
-
+						
 						
 							if ( data{{ Timelike.id }}.previd != data{{ Timelike.id }}.id ){
-								$("#transcript{{ Timelike.id }}").find(prevhtml{{ Timelike.id }}).before(containtranhtml{{ Timelike.id }});
+								
+								$("#transcriptLive{{ Timelike.id }}").find(prevhtml{{ Timelike.id }}).before(containtranhtml{{ Timelike.id }});
+								$("#transcriptFull{{ Timelike.id }}").find(prevFullhtml{{ Timelike.id }}).before(containtranFullhtml{{ Timelike.id }});
 							}
 							else {
-								$("#transcript{{ Timelike.id }}").append(containtranhtml{{ Timelike.id }});
+								$("#transcriptLive{{ Timelike.id }}").append(containtranhtml{{ Timelike.id }});
+								$("#transcriptFull{{ Timelike.id }}").append(containtranFullhtml{{ Timelike.id }});
 							}
 							
 							
@@ -49,16 +55,28 @@
 						 	text: data{{ Timelike.id }}.comment,
 						 	target: contain{{ Timelike.id }},
 					 	});
+					 	
 					 	time{{ Timelike.id }}.footnote({
 						 	start: data{{ Timelike.id }}.start,
 						 	text: Math.floor(data{{ Timelike.id }}.start) + "s "+ data{{ Timelike.id }}.comment,
 						 	target: containtran{{ Timelike.id }},
 					 	});
 					 	
+					 	time{{ Timelike.id }}.footnote({
+						 	start: 0,
+						 	text: Math.floor(data{{ Timelike.id }}.start) + "s "+ data{{ Timelike.id }}.comment,
+						 	target: containtranFull{{ Timelike.id }},
+					 	});
+					 	
 					 	$("#" + containtran{{ Timelike.id }}).click(function(){
 			 				time{{ Timelike.id }}.play();
 			 				time{{ Timelike.id }}.currentTime( data{{ Timelike.id }}.start );
-						 });	
+						 });
+						 
+						 $("#" + containtranFull{{ Timelike.id }}).click(function(){
+			 				time{{ Timelike.id }}.play();
+			 				time{{ Timelike.id }}.currentTime( data{{ Timelike.id }}.start );
+						 });		
 						
 						
 					},
