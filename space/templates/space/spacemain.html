@@ -7,10 +7,18 @@
 		$(document).ready(function(){
 
 // This is to highlight a sentence when clicked on. And to pull the x,y position of the mouse to open a popup menu.
-		    $('.sentence').click(function(e){
+		    $('.sentence').click(function(){
     			$('.sentence').css('background-color', 'transparent');
    		    	$(this).css('background-color', '#ff9');
-   		    	$('#txt_context').css({'visibility':'visible', 'left':e.pageX, 'top':e.pageY+5});
+   		    	var xy = $(this).position();
+   		    	var w = $(this).width();
+   		    	var h = $('#txt_info').height();
+   		    	$('#txt_info').css({'visibility':'visible', 'left':xy.left+w, 'top':xy.top-h});
+  		 	});
+  		 	
+  		 	$('#txt_info').click(function(e){
+  		 		$(this).css({'visibility':'hidden'});
+  		 		$('#txt_context').css({'visibility':'visible', 'left':e.pageX, 'top':e.pageY+5});
   		 	});
 
 		});
@@ -68,7 +76,11 @@
 					<p><img class="alignnone" src="http://media.npr.org/assets/img/2012/03/19/einstein-75dffc8af00c56b1cf93b7058f15af1360ac6bca-s6-c10.jpg" alt="" width="569" height="427" /></p>
 				</div>
 				<div class="imgdiv_options">
-					<p>haha</p>
+<!-- Because the image takes up the whole width, this options part is displayed beneath the image. I want it to the side.-->
+					<button class="btn"><i class="icon-tag"></i></button>
+					<button class="btn"><i class="icon-picture"></i></button>
+				</div>
+				<div class="imgdiv_captions">
 				</div>
 			</div>
 			<div class="txtcontainer">
@@ -99,15 +111,60 @@
 
 <!-- Context menu for images -->
 
-<!-- info menu for text, this should display how many comments there are and have a button for adding comments -->
+<!-- Info popup for text, this should display how many comments there are and have a button for adding comments -->
 <div id="txt_info" style="visibility:hidden;z-index=2;position:absolute; top:0px; left:0px;">
-	<p>12</p>
+<!-- I want the content here to look like a speech bubble with the number of comments inside. And upon hover, turn into a plus sign -->
+	<a class="btn" id="txt_info_button">
+		<div id="firstbtn">12</div>
+		<div id="secondbtn">+</div>
+	</a>
 </div>
 
 <!-- Context menu for text -->
-<div id="txt_context" style="visibility:hidden; z-index=1; position:absolute; top:0px; left:0px;">
+<div id="txt_context" style="visibility:hidden; z-index=1; position:absolute; top:0px; left:0px; border-style:solid; background:white">
 	<i class="icon-pencil"></i>
+	<i class="icon-remove"></i>
+	<ul>
+		<li>12 comments</li>
+<!-- the following links should automatically load up the relevant tabs in the modal -->
+		<li><a href="#txt_comments" data-toggle="modal">Add comment</a></li>
+		<li><a href="#txt_comments" data-toggle="modal">View comment</a></li>
+	</ul>
 </div>
+
+<!-- Container to display the text comments -->
+<div class="modal hide fade" id="txt_comments" draggable="true">
+	<div class="modal-header">
+		<ul class="nav nav-tabs">
+			<li><a href="#thread1" data-toggle="tab">Thread 1</a></li>
+			<li><a href="#thread2" data-toggle="tab">Thread 2</a></li>
+			<li><a href="#thread3" data-toggle="tab">Thread 3</a></li>
+			<li><a href="#newthread" data-toggle="tab">New thread</a></li>
+		</ul>
+	</div>
+	<div class="modal-body">
+<!-- The tab contents needs to be pulled from the database and we need a better id method -->
+		<div class="tab-content">
+			<div class="tab-pane active" id="thread1">
+				<p>There is the first comment thread. I need to be able to pull this from database.</p>
+			</div>
+			<div class="tab-pane" id="thread2">
+				<p>This is the second comment thread.</p>
+			</div>
+			<div class="tab-pane" id="thread3">
+				<p>This is the third.</p>
+			</div>
+			<div class="tab-pane" id="newthread">
+				<p>Comment adding forms here</p>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Close</a>
+		<a href="#" class="btn btn-primary">Save changes</a>
+	</div>
+</div>
+
 
 <!-- Check for Zepto support, load jQuery if necessary -->
 <script>

@@ -205,3 +205,13 @@ span.sentence:hover {
 	padding: 0px;
 	border: 1px solid red;
 }
+
+/* This controls the button that shows when you click on a sentence */
+/* It changes the content of the button when you hover over it to let you add a comment */
+/* Clicking on the button opens a div box where the button was to add or view comments */
+
+a#txt_info_button {width: 1em;}
+div#firstbtn{display: block;}
+div#secondbtn{display: none;}
+a#txt_info_button:hover div:first-child{display: none;}
+a#txt_info_button:hover div:nth-child(2){display: block;}
