@@ -95,6 +95,7 @@ body {
 
 .center-pills { display: inline-block; }
 
+
 .modal.large {
 	top: 50%;
 	left: 50%;
@@ -189,9 +190,7 @@ a {
 	vertical-align: bottom;
 }
 
-.imgdiv_options~button {
 
-}
 
 .imgcontainer:hover > .imgdiv_options {
 	display: inline-block;
@@ -205,3 +204,21 @@ span.sentence:hover {
 	padding: 0px;
 	border: 1px solid red;
 }
+
+	
+
+.modal.large {
+	top: 50%;
+	left: 50%;
+	width: 86%;
+	height: 86%;
+	margin-left: -43%;
+ }
+
+.modal-body-large {
+  position: relative;
+  max-height: 80%;
+  padding: 15px;
+  overflow-y: auto;
+}
+

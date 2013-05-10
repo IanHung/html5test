@@ -15,15 +15,12 @@
 		</div>
 		{% if Timelike.author %}
 		<div class='row {{ Timelike.author.username }} user small-height'>
-			{% if Timelike.author.username == user.username %}
 				<div class="span1 offset6 text-right">
 					<p>Side?</p>
 				</div>
 				<div class="span1 text-vcentre">
-					 <input id="id_comment{{ Timelike.id }}" type="checkbox" name="isBasic" checked="checked"/>
+					 <input id="id_comment{{ Timelike.id }}" type="checkbox" name="isBasic"/>
 				</div>
-
-			{% endif %}
 		</div>
 		{% endif %}
 	</form>
