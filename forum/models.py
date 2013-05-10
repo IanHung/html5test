@@ -36,7 +36,7 @@ class Comment(models.Model):
         return False
     
     def get_earlier_id(self):
-        later = Comment.objects.filter(isBasic=True,content_type=self.content_type, object_id=self.object_id ,start__lte=self.start).exclude(id=self.id).order_by('-start')
+        later = Comment.objects.filter(content_type=self.content_type, object_id=self.object_id ,start__lte=self.start).exclude(id=self.id).order_by('-start')
         if later:
             return later[0].id
         return self.id
