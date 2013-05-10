@@ -84,6 +84,8 @@
 
             <hr>
 
+	        {% block modal %}{% endblock %}
+
             <footer>
             	<div class="container">
                 	<p>&copy; Company 2013</p>
@@ -107,7 +109,5 @@
             g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>
-
-
     </body>
 </html>
