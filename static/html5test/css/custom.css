@@ -176,3 +176,32 @@ a {
 	 display:inline-block;
 	 vertical-align:top;
 }
+
+.imgdiv_img, .imgdiv_options {
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    vertical-align: top;
+    font-size: 12px;
+}
+.imgdiv_options {
+	display: none;
+	vertical-align: bottom;
+}
+
+.imgdiv_options~button {
+
+}
+
+.imgcontainer:hover > .imgdiv_options {
+	display: inline-block;
+}
+
+span.sentence {
+	padding: 1px;
+}
+
+span.sentence:hover {
+	padding: 0px;
+	border: 1px solid red;
+}
