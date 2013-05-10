@@ -18,7 +18,8 @@ until I can figure out how sequence works
 
 end: {{ comment.end }},
 
-		 
+		 <p><label for="id_isBasic">IsBasic:</label> <input checked="checked" id="id_isBasic" name="isBasic" type="checkbox" /></p>
+
 		 time{{ Timelike.id }}.footnote({
 		 	start: 1,
 		 	text: '<div class="row"><div class="span8 well"><div class="timelikecomment">{% for comment in Timelike.comment.all %}{% if Timelike.author != comment.author %}<h1 id="footnote{{ comment.id }}"></h1>{% endif %}{% endfor %}</div></div></div>',

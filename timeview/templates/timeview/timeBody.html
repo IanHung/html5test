@@ -18,7 +18,7 @@
 						 				<div class='timelikecomment'>
 						 					{% include 'forum/timelikeCommentBody.html' %}
 						 					{% for comment in Timelike.comment.all %}
-						 						{% if comment.isBasic %}
+						 						{% if not comment.isBasic %}
 						 						<h4 id='video{{ Timelike.id }}footnote{{ comment.id }}'></h4>
 						 						{% endif %}
 						 					{% endfor %}
@@ -46,7 +46,7 @@
 									<div class="tab-content col3">
 										<div class="tab-pane fade in active" id="text{{ Timelike.id }}">
 											{% for comment in Timelike.comment.all %}
-												{% if not comment.isBasic %}
+												{% if comment.isBasic %}
 													<h4 id="video{{ Timelike.id }}footnote{{ comment.id }}"></h4>
 												{% endif %}
 											{% endfor %}

@@ -21,7 +21,7 @@ class Comment(models.Model):
     start = models.FloatField(blank=True)
     end = models.FloatField(blank=True)
     #Enrichment comment or just a basic comment.
-    isBasic = models.BooleanField(default=True)
+    isBasic = models.BooleanField()
   
 
     def __str__(self):

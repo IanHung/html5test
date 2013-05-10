@@ -22,7 +22,10 @@ def index(request):
             comment.title=request.POST['title']
             comment.object_id=request.POST['object_id']
             comment.content_type=ContentType.objects.get_for_model(Timelike)
-            comment.isBasic=request.POST['isBasic']
+            if (request.POST['isBasic']=='on'):
+                comment.isBasic=True
+            else:
+                comment.isBasic=False
             comment.save()
             newComment = Comment.objects.latest('pubDate')
             message = newComment.singlejson()

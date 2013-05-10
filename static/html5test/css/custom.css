@@ -152,3 +152,14 @@ a {
 .whitespace {
 	margin-right: 15px;
 }
+
+.small-height{
+	height: 0px;
+}
+
+.text-vcentre {
+	 display:inline-block;
+	 vertical-align:top;
+}
+
+	
