@@ -18,9 +18,39 @@ until I can figure out how sequence works
 
 end: {{ comment.end }},
 
-		 
+		 <p><label for="id_isBasic">IsBasic:</label> <input checked="checked" id="id_isBasic" name="isBasic" type="checkbox" /></p>
+
 		 time{{ Timelike.id }}.footnote({
 		 	start: 1,
 		 	text: '<div class="row"><div class="span8 well"><div class="timelikecomment">{% for comment in Timelike.comment.all %}{% if Timelike.author != comment.author %}<h1 id="footnote{{ comment.id }}"></h1>{% endif %}{% endfor %}</div></div></div>',
 		 	target: "subtitle{{ Timelike.id }}"
 		 });
+		 
+
+			/*
+			$('#form').submit(function(e){
+							$.post('/test/ajax/', $(this).serialize(), function(data){
+								var json = $.parseJSON(data);
+								$('.message').html(json.message);
+								alert("test2");
+							   //$('.message').html(data.message);
+							   // of course you can do something more fancy with your respone
+							});
+							e.preventDefault();*/
+			/*
+				
+			*/
+			
+			+'&parameter=param1'
+<QueryDict: {u'comment': [u'sadgad'], u'end': [u'50'], u'author': [u'1'], u'title': [u'dags'], u'object_id': [u'2'], u'start': [u'2'], u'content_type': [u'10'], u'csrfmiddlewaretoken': [u'2NfMuiD5JMTOOp9ArP0QtBSHg2Eug6Wc'], u'parameter': [u'param1'], u'isBasic': [u'on']}>
+			
+
+		$("div").css("border", "3px solid red");
+				event{{ Timelike.id }}.preventDefault();
+				
+time{{ Timelike.id }}.footnote({
+						 	start: data{{ Timelike.id }}.start,
+						 	end: data{{ Timelike.id }}.end,
+						 	text: data{{ Timelike.id }}.comment,
+						 	target: contain{{ Timelike.id }},
+					 	});

@@ -1,0 +1,104 @@
+
+			$('input.comment').on('keyup', function() {
+			  $(this).next('.mybtn').click();
+			});
+			{% for Timelike in timelike_list %}		
+			$('#form{{ Timelike.id }}').submit(function(event{{ Timelike.id }}) {
+				//do some form cleaning here
+				
+				var end{{ Timelike.id }} = time{{ Timelike.id }}.currentTime()+10;
+				var endPost{{ Timelike.id }} = '&end=' + end{{ Timelike.id }};
+				var authorPost{{ Timelike.id }} = '&author=1';				
+				var titlePost{{ Timelike.id }} = '&title=' +"Timelike " + {{ Timelike.id }} +" at "+time{{ Timelike.id }}.currentTime() +" " + Date();
+				
+				var objectidPost{{ Timelike.id }} = '&object_id={{ Timelike.id }}';
+				var start{{ Timelike.id }} = time{{ Timelike.id }}.currentTime();
+				var startPost{{ Timelike.id }} = '&start=' + start{{ Timelike.id }};
+				var contenttypePost{{ Timelike.id }} = '&content_type=10';
+				
+				if ($('#id_comment{{ Timelike.id }}').prop('checked')){
+					var totalData = $(this).serialize() +  endPost{{ Timelike.id }} + authorPost{{ Timelike.id }} + titlePost{{ Timelike.id }} + objectidPost{{ Timelike.id }} + startPost{{ Timelike.id }} + contenttypePost{{ Timelike.id }};
+				}
+				else {
+					var totalData =	$(this).serialize() +  endPost{{ Timelike.id }} + authorPost{{ Timelike.id }} + titlePost{{ Timelike.id }} + objectidPost{{ Timelike.id }} + startPost{{ Timelike.id }} + contenttypePost{{ Timelike.id }} +'&isBasic=False';
+				}
+				$.ajax({
+					url:"{% url 'timeview' %}",
+					data: totalData,
+					type: "POST",
+					dataType: "json",
+					success: function( data{{ Timelike.id }} ) {
+						
+						var contain{{ Timelike.id }} = "video" +data{{ Timelike.id }}.object_id + "footnote" + data{{ Timelike.id }}.id;
+						var containhtml{{ Timelike.id }} = '<h4 id="' + contain{{ Timelike.id }} + '"></h4>';
+						var containtran{{ Timelike.id }} = "video" +data{{ Timelike.id }}.object_id + "transcript" + data{{ Timelike.id }}.id;
+						var containtranhtml{{ Timelike.id }} = '<h4 id="' + containtran{{ Timelike.id }} + '"></h4>';			
+						var prevhtml{{ Timelike.id }} = "#video" +data{{ Timelike.id }}.object_id + "transcript" + data{{ Timelike.id }}.previd;
+						var containtranFull{{ Timelike.id }} = "video" +data{{ Timelike.id }}.object_id + "transcriptFull" + data{{ Timelike.id }}.id;
+						var containtranFullhtml{{ Timelike.id }} = '<h4 id="' + containtranFull{{ Timelike.id }} + '"></h4>';
+						var prevFullhtml{{ Timelike.id }} = "#video" +data{{ Timelike.id }}.object_id + "transcriptFull" + data{{ Timelike.id }}.previd;	
+						
+						if(data{{ Timelike.id }}.isBasic){
+							$("#sidemenu{{ Timelike.id }}").find('#text{{ Timelike.id }}').append(containhtml{{ Timelike.id }});
+						}
+						else{
+							$("#subtitle{{ Timelike.id }}").find('.timelikecomment').append(containhtml{{ Timelike.id }});
+						}
+						
+						
+							if ( data{{ Timelike.id }}.previd != data{{ Timelike.id }}.id ){
+								
+								$("#transcriptLive{{ Timelike.id }}").find(prevhtml{{ Timelike.id }}).before(containtranhtml{{ Timelike.id }});
+								$("#transcriptFull{{ Timelike.id }}").find(prevFullhtml{{ Timelike.id }}).before(containtranFullhtml{{ Timelike.id }});
+							}
+							else {
+								$("#transcriptLive{{ Timelike.id }}").append(containtranhtml{{ Timelike.id }});
+								$("#transcriptFull{{ Timelike.id }}").append(containtranFullhtml{{ Timelike.id }});
+							}
+							
+							
+						time{{ Timelike.id }}.footnote({
+						 	start: data{{ Timelike.id }}.start,
+						 	end: data{{ Timelike.id }}.end,
+						 	text: data{{ Timelike.id }}.comment,
+						 	target: contain{{ Timelike.id }},
+					 	});
+					 	
+					 	time{{ Timelike.id }}.footnote({
+						 	start: data{{ Timelike.id }}.start,
+						 	text: Math.floor(data{{ Timelike.id }}.start) + "s "+ data{{ Timelike.id }}.comment,
+						 	target: containtran{{ Timelike.id }},
+					 	});
+					 	
+					 	time{{ Timelike.id }}.footnote({
+						 	start: 0,
+						 	text: Math.floor(data{{ Timelike.id }}.start) + "s "+ data{{ Timelike.id }}.comment,
+						 	target: containtranFull{{ Timelike.id }},
+					 	});
+					 	
+					 	$("#" + containtran{{ Timelike.id }}).click(function(){
+			 				time{{ Timelike.id }}.play();
+			 				time{{ Timelike.id }}.currentTime( data{{ Timelike.id }}.start );
+						 });
+						 
+						 $("#" + containtranFull{{ Timelike.id }}).click(function(){
+			 				time{{ Timelike.id }}.play();
+			 				time{{ Timelike.id }}.currentTime( data{{ Timelike.id }}.start );
+						 });		
+						
+						
+					},
+					
+					error: function( xhr, status ) {
+						alert("Sorry, there was a problem!");
+					},
+					
+					complete: function( xhr, status ) {
+						$('#form{{ Timelike.id }}')[0].reset();
+					},
+										
+				});
+				event{{ Timelike.id }}.preventDefault();
+			});
+			{% endfor %}
+					

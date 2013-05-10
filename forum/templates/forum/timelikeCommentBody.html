@@ -1,0 +1,30 @@
+<div class='row'>
+	<form id='form{{ Timelike.id }}' action='' method='post'>
+		{% csrf_token %}{{ form.non_field.errors }}
+		<div class = 'span1'>
+			{{ form.comment.errors }}
+			<label for='id_comment'>
+				Comment:
+			</label>
+		</div>
+		<div class='span5'>
+			{{ form.comment }}
+		</div>
+		<div class='span1'>
+			<button class='btn mybtn' type='submit' id='submitbtn{{ Timelike.id }}'>Submit</button>
+		</div>
+		{% if Timelike.author %}
+		<div class='row {{ Timelike.author.username }} user small-height'>
+			{% if Timelike.author.username == user.username %}
+				<div class="span1 offset6 text-right">
+					<p>Side?</p>
+				</div>
+				<div class="span1 text-vcentre">
+					 <input id="id_comment{{ Timelike.id }}" type="checkbox" name="isBasic" checked="checked"/>
+				</div>
+
+			{% endif %}
+		</div>
+		{% endif %}
+	</form>
+</div>

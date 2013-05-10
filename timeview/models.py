@@ -8,6 +8,7 @@ from django.contrib.contenttypes import generic
 class Timelike(models.Model):
     #basic fields
     title = models.CharField(max_length=200)
+    pubDate = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, blank=True, null=True)
     localsource = models.FileField(upload_to='video/timelike', blank=True)
     youtubesource = models.URLField(max_length=200, blank=True)

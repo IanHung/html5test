@@ -8,6 +8,11 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'basePages.views.home', name='home'),
+    url(r'^generallogin/$', 'basePages.views.generalLogin', name='login'),
+    url(r'^generallogout/$', 'basePages.views.generalLogout', name='logout'),
+    
+    # url()
+    url(r'^test/$', 'forum.views.PostComment', name='comment'),
     # url(r'^html5test/', include('html5test.foo.urls')),
     url(r'^time/$', 'timeview.views.index', name='timeview'),
 
@@ -18,6 +23,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^accounts/', include('registration.backends.default.urls')),
 )
 
 if settings.DEBUG:

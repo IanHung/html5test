@@ -1,0 +1,8 @@
+<div class='row'>
+	<form id='form{{ Timelike.id }}' action='' method='post'>
+		{% csrf_token %}
+		{{form.as_p}}
+			<button class='btn mybtn' type='submit'>Comment</button>
+		</div>
+	</form>
+</div>
