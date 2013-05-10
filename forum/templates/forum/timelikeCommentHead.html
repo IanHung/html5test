@@ -2,8 +2,11 @@
 			$('input.comment').on('keyup', function() {
 			  $(this).next('.mybtn').click();
 			});
-			{% for Timelike in timelike_list %}		
-			$('#form{{ Timelike.id }}').submit(function(event{{ Timelike.id }}) {
+			{% for Timelike in timelike_list %}
+			{% if Timelike.author.username != user.username %}
+				$('.{{ Timelike.author.username }}').hide();
+			{% endif %}		
+			$('.timelikecomment').on('submit','#form{{ Timelike.id }}', function(event{{ Timelike.id }}) {
 				//do some form cleaning here
 				
 				var end{{ Timelike.id }} = time{{ Timelike.id }}.currentTime()+10;
