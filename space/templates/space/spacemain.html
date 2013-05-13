@@ -5,7 +5,6 @@
 {% block head %}
 	<script type="text/javascript">
 		$(document).ready(function(){
-
 // This is to highlight a sentence when clicked on. And to pull the x,y position of the mouse to open a popup menu.
 		    $('.sentence').click(function(){
     			$('.sentence').css('background-color', 'transparent');
@@ -16,11 +15,19 @@
    		    	$('#txt_info').css({'visibility':'visible', 'left':xy.left+w, 'top':xy.top-h});
   		 	});
   		 	
-  		 	$('#txt_info').click(function(e){
+  		 	$('#txt_info').click(function(){
   		 		$(this).css({'visibility':'hidden'});
-  		 		$('#txt_context').css({'visibility':'visible', 'left':e.pageX, 'top':e.pageY+5});
+  		 		var xy = $(this).position();
+  		 		$('#txt_context').css({'visibility':'visible', 'left':xy.left, 'top':xy.top});
   		 	});
-
+  		 	
+/* This function should hide things when you click on an empty place.
+ * Figure a lot of things should dismiss on click.
+ * It's commented out because I need to think of conflicts with the other actions on click.
+ *  	 	$().click(function(){
+ * 		 		$(#dismissOnClick).css({'visibility':'hidden'});
+ * 		 	}); 
+ */
 		});
     </script>
 {% endblock %}
@@ -121,15 +128,19 @@
 </div>
 
 <!-- Context menu for text -->
-<div id="txt_context" style="visibility:hidden; z-index=1; position:absolute; top:0px; left:0px; border-style:solid; background:white">
-	<i class="icon-pencil"></i>
-	<i class="icon-remove"></i>
-	<ul>
-		<li>12 comments</li>
+<div id="txt_context" style="visibility:hidden; z-index=1; position:absolute; top:0px; left:0px; border-style:solid; background:white; display:block">
+	<div id="txt_context_header" style="padding:0.25em">
+		<i class="icon-pencil" style="float:left"></i>
+		<i class="icon-remove" style="float:right"></i>
+	</div>
+	<div id="txt_context_menu">
+		<ul>
+			<li>12 comments</li>
 <!-- the following links should automatically load up the relevant tabs in the modal -->
-		<li><a href="#txt_comments" data-toggle="modal">Add comment</a></li>
-		<li><a href="#txt_comments" data-toggle="modal">View comment</a></li>
-	</ul>
+			<li><a href="#txt_comments" data-toggle="modal">Add comment</a></li>
+			<li><a href="#txt_comments" data-toggle="modal">View comment</a></li>
+		</ul>
+	</div>
 </div>
 
 <!-- Container to display the text comments -->
