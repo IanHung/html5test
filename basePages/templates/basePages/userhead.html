@@ -1,0 +1,57 @@
+<script>
+	$(document).ready(function(){
+		$('#userblock').on("submit", '#login', function(eventlogin){
+			$.ajax({
+					url:"{% url 'login' %}",
+					data: $('#login').serialize(),
+					type: "POST",
+					dataType: "json",
+					success: function( datalogin ) {
+							if (datalogin.worked){
+								$('#userblock').html('<div class="pull-right"><button id="logout" class="btn">Sign out</button></div><div class="navbar-text pull-right whitespace"><p>Hello ' + datalogin.user + ', welcome to our site.</p></div>');
+								$('.' + datalogin.user).show();
+							}
+							else {
+								alert("Username/Password incorrect. Please try again.");
+							}										
+					},
+					
+					error: function( xhr, status, error ) {
+						alert("Sorry, there was a problem!"+ error + $(this).serialize);
+					},
+					
+					complete: function( xhr, status ) {
+						$('#login')[0].reset();
+					},
+										
+				});
+			event{{ Timelike.id }}.preventDefault();
+		});
+		
+		$('#userblock').on('click', '#logout', function(eventlogin){
+						
+			$.ajax({
+					url:"{% url 'logout' %}",
+					data: "",
+					type: "GET",
+					dataType: "json",
+					success: function( datalogout ) {
+						$('#userblock').html("<form id='login' action='' class='navbar-form pull-right' method='post'>{% csrf_token %}<input name='username' id='id_username' class='span2' type='text' placeholder='Username'/><input name='password' id='id_password'  class='span2' type='password' placeholder='Password'/><button type='submit' class='btn mybtn'>Sign in</button></form><div class='pull-right whitespace'><a class='brand' href=" + "'{% url 'registration_register' %}'" + ">Not registered?</a></div>");
+						$('.user').hide();														
+					},
+					
+					error: function( xhr, status, error ) {
+						alert("Sorry, there was a problem!"+error);
+					},
+					
+					complete: function( xhr, status ) {
+						
+					},
+										
+				});
+			event{{ Timelike.id }}.preventDefault();
+		});
+		
+	});
+</script>
+

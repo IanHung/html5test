@@ -1,96 +1,77 @@
 <!--Include this where you would like the video to appear. Remember to set appropriate context if timelike_list is called something else.-->
-
 {% if timelike_list %}
-    <script>
-      
-      // ensure the web page (DOM) has loaded
-      document.addEventListener("DOMContentLoaded", function () {
-      	 
-      	 
-      	 
-      	//Due to the way DOMContentLoaded works we have to break up the for loop into 2 parts 
- 		{% for Timelike in timelike_list %}	
- 		
-          
-           // Create a popcorn instance by calling the Youtube player plugin
-         var time{{ Timelike.id }} = Popcorn.youtube(
-           "#video{{ Timelike.id }}",
-           "{{ Timelike.youtubesource }}" );
-           
-          {% endfor %}
-		  
-         
-      	   
-          
-     
- 		{% for Timelike in timelike_list %}
- 		
- 		
- 		time{{ Timelike.id }}.footnote({
-		 	start: 0.00000001,
-		 	text: '<div class="row"><div class="span8 well"><div class="timelikecomment">{% for comment in Timelike.comment.all %}{% if comment.isBasic %}<h1 id="video{{ Timelike.id }}footnote{{ comment.id }}"></h1>{% endif %}{% endfor %}</div></div></div>',
-		 	target: "subtitle{{ Timelike.id }}"
-		 });
-		 
-		 {% if Timelike.comment.all %}
-		  time{{ Timelike.id }}.footnote({
-		 	start: 0.00000001,
-		 	text: '<div class="span4 well col"><div class="row text-center"><ul class="nav nav-pills black center-pills"><li class="active"><a href="#text{{ Timelike.id }}" data-toggle="tab">Text</a></li><li><a href="#transcript{{ Timelike.id }}" data-toggle="tab">Transcript</a></li></ul></div><div class="tab-content"><div class="tab-pane fade in active" id="text{{ Timelike.id }}">{% for comment in Timelike.comment.all %}{% if not comment.isBasic %}<h1 id="video{{ Timelike.id }}footnote{{ comment.id }}"></h1>{% endif %}{% endfor %}</div><div class="tab-pane fade" id="transcript{{ Timelike.id }}">{% for comment in Timelike.comment.all %}<h1 id="video{{ Timelike.id }}transcript{{ comment.id }}"></h1>{% endfor %}</div></div></div>',
-		 	target: "sidemenu{{ Timelike.id }}"
-		 });
+    <script type="text/javascript">    // ensure the web page (DOM) has loaded
+	      $(document).ready(function () {
+	      	//Due to the way DOMContentLoaded works we have to break up the for loop into 2 parts 
+	 		{% for Timelike in timelike_list %}	
+	          //This is Popcorn.js
+	           // Create a popcorn instance by calling the Youtube player plugin
+	         var time{{ Timelike.id }} = Popcorn.youtube(
+	           "#video{{ Timelike.id }}",
+	           "{{ Timelike.youtubesource }}" );
+	        {% endfor %}
+	 		{% for Timelike in timelike_list %}
+	 		time{{ Timelike.id }}.code({
+			 	start: 0.00000001,
+			 	onStart: function() {
+			 		$("#subtitle{{ Timelike.id }}").show();
+			 		$("#sidemenu{{ Timelike.id }}").show();
+			 	}
+			 });
+	         {% if Timelike.comment.all %}
+			 {% for comment in Timelike.comment.all %}
+			 {% if comment.isBasic %}
+			 time{{ Timelike.id }}.footnote({
+			 	start: {{ comment.start }},
+			 	end: {% if comment.get_later_start %}{{ comment.get_later_start }}{% else %}{{ comment.end }}{% endif %},
+			 	text: "{{ comment.comment }}",
+			 	target: "video{{ Timelike.id }}footnote{{ comment.id }}"
+			 });
+			 {% else %}
+			 time{{ Timelike.id }}.footnote({
+			 	start: {{ comment.start }},
+			 	end: {{ comment.end }},
+			 	text: "{{ comment.comment }}",
+			 	target: "video{{ Timelike.id }}footnote{{ comment.id }}"
+			 });
+			 {% endif %}
+			 time{{ Timelike.id }}.footnote({
+			 	start: {{ comment.start }},
+			 	text: Math.floor({{ comment.start }})+ "s "+ "{{ comment.comment }}",
+			 	target: "video{{ Timelike.id }}transcript{{ comment.id }}"
+			 	
+			 });
+			 
+			 time{{ Timelike.id }}.footnote({
+			 	start: 0,
+			 	text: Math.floor({{ comment.start }})+ "s "+ "{{ comment.comment }}",
+			 	target: "video{{ Timelike.id }}transcriptFull{{ comment.id }}"
+			 	
+			 });
 
-
-
-            	
-         
-		 {% for comment in Timelike.comment.all %}
-	
-
-		 {% if comment.isBasic %}
-		 time{{ Timelike.id }}.footnote({
-		 	start: {{ comment.start }},
-		 	end: {% if comment.get_later_start %}{{ comment.get_later_start }}{% else %}{{ comment.end }}{% endif %},
-		 	text: "{{ comment.comment }}",
-		 	target: "video{{ Timelike.id }}footnote{{ comment.id }}"
-		 });
-		 {% else %}
-		 time{{ Timelike.id }}.footnote({
-		 	start: {{ comment.start }},
-		 	end: {{ comment.end }},
-		 	text: "{{ comment.comment }}",
-		 	target: "video{{ Timelike.id }}footnote{{ comment.id }}"
-		 });
-		 {% endif %}
-		 
-		 time{{ Timelike.id }}.footnote({
-		 	start: {{ comment.start }},
-		 	end: 300,
-		 	text: "{{ comment.start }} {{ comment.comment }}",
-		 	target: "video{{ Timelike.id }}transcript{{ comment.id }}"
-		 	
-		 });			 
-		 {% endfor %}
-		 
-
-		 {% endif %}
-		
- 		 {% endfor %}
- 		 
- 		 {% for Timelike in timelike_list %}
- 		 
- 		 $('#btn{{ Timelike.id }}').button();
- 		 
- 		  $('#btn{{ Timelike.id }}').click(function(){
-			    
-			    // toggle our footnote on/off with each click
-			    
-			   time{{ Timelike.id }}.toggle( "footnote" );
-			   	
-			});
-			
-		   {% endfor %}
- 		 
-      }, true);
-      
-    </script>
+			 $("#video{{ Timelike.id }}transcript{{ comment.id }}").click(function(){
+			 			time{{ Timelike.id }}.play();
+			 			time{{ Timelike.id }}.currentTime( {{ comment.start }} );
+			 });
+			 $("#video{{ Timelike.id }}transcriptFull{{ comment.id }}").click(function(){
+			 			time{{ Timelike.id }}.play();
+			 			time{{ Timelike.id }}.currentTime( {{ comment.start }} );
+			 });				 
+			 {% endfor %}
+			 {% endif %}
+	 		 {% endfor %}
+	 		 {% include 'forum/timelikeCommentHead.html' %}
+	 		 {% for Timelike in timelike_list %}
+	 		 // This is jquery.js
+	 		 $('#btn{{ Timelike.id }}').button();
+ 			 $('#btn{{ Timelike.id }}').click(function(){
+				    // toggle our footnote on/off with each click
+				   $("#subtitle{{ Timelike.id }}").toggle();
+				   $("#sidemenu{{ Timelike.id }}").toggle();
+				});
+			   {% endfor %}
+			   
+	      });
+	    </script>
+	   
 {% endif %}
