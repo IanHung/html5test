@@ -26,7 +26,7 @@
 					var totalData =	$(this).serialize() +  endPost{{ Timelike.id }} + authorPost{{ Timelike.id }} + titlePost{{ Timelike.id }} + objectidPost{{ Timelike.id }} + startPost{{ Timelike.id }} + contenttypePost{{ Timelike.id }} +'&isBasic=False';
 				}
 				$.ajax({
-					url:"{% url 'timeview' %}",
+					url:"{% url 'comment' %}",
 					data: totalData,
 					type: "POST",
 					dataType: "json",

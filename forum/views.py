@@ -1,18 +1,31 @@
 # Create your views here.
+
 import json
-from django.shortcuts import render, HttpResponse
+from forum.models import Comment
+from django.contrib.contenttypes.models import ContentType
 from forum.forms import CommentForm
+from timeview.models import Timelike
+from django.shortcuts import HttpResponse
 
 def PostComment(request):
-    if request.method == "POST":
-        form = CommentForm(request.POST)
-        print(request.POST)
-        message = 'something wrong!'
-        if(form.is_valid()):
-            print(form)
-            form.save()
-
-        return HttpResponse(json.dumps({'message': message}))
-
-    return render(request, 'forum/comment.html',
-            {'form':CommentForm()})
+    commentform = CommentForm(request.POST)
+    message = {'message': 'something wrong!'} 
+    print(request.POST)
+    if(commentform.is_valid()):
+        comment=commentform.save(commit=False)
+        if request.user.is_authenticated():
+            comment.author = request.user
+        comment.end=request.POST['end']
+        comment.start=request.POST['start']
+        comment.title=request.POST['title']
+        comment.object_id=request.POST['object_id']
+        comment.content_type=ContentType.objects.get_for_model(Timelike)
+        if (request.POST['isBasic']=='on'):
+            comment.isBasic=True
+        else:
+            comment.isBasic=False
+        comment.save()
+        newComment = Comment.objects.latest('pubDate')
+        message = newComment.singlejson()
+        print(message)
+    return HttpResponse(json.dumps(message))
