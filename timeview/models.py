@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from forum.models import Comment
 from django.contrib.contenttypes import generic
+from basePages.models import PositionInArticle
 
 
 # Create your models here.
@@ -15,7 +16,7 @@ class Timelike(models.Model):
     vimeosource = models.URLField(max_length=200, blank=True)
     #adding relationship to Comment class
     comment = generic.GenericRelation(Comment)
-    
+    positionInArticle = models.ForeignKey(PositionInArticle, null=True)
     
     def __str__(self):
         return self.title
