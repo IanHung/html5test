@@ -1,0 +1,30 @@
+<div class='row'>
+	<form id='form{{ ImageClass.id }}' action='' method='post'>
+		{% csrf_token %}{{ form.non_field.errors }}
+		<div class = 'span1'>
+			{{ form.comment.errors }}
+			<label for='id_comment'>
+				Comment:
+			</label>
+		</div>
+		<div class='span5'>
+			{{ form.comment }}
+		</div>
+		<div class='span1'>
+			<button class='btn mybtn' type='submit' id='submitbtn{{ ImageClass.id }}'>Submit</button>
+		</div>
+		{% if ImageClass.author %}
+		<div class='row {{ ImageClass.author.username }} user small-height'>
+			{% if ImageClass.author.username == user.username %}
+				<div class="span1 offset6 text-right">
+					<p>Side?</p>
+				</div>
+				<div class="span1 text-vcentre">
+					 <input id="id_comment{{ ImageClass.id }}" type="checkbox" name="isBasic" checked="checked"/>
+				</div>
+
+			{% endif %}
+		</div>
+		{% endif %}
+	</form>
+</div>
