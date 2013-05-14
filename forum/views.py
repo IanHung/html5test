@@ -7,6 +7,14 @@ from forum.forms import CommentForm
 from timeview.models import Timelike
 from django.shortcuts import HttpResponse
 
+def GetObjectType(typeID):
+    if(typeID==1):
+        return ContentType.objects.get_for_model(Timelike)
+    elif(typeID==2):
+        return ContentType.objects.get_for_model(ImageClass)
+    elif(typeID==3):
+        return ContentType.objects.get_for_model(Sentence)
+
 def PostComment(request):
     commentform = CommentForm(request.POST)
     message = {'message': 'something wrong!'} 
@@ -19,7 +27,7 @@ def PostComment(request):
         comment.start=request.POST['start']
         comment.title=request.POST['title']
         comment.object_id=request.POST['object_id']
-        comment.content_type=ContentType.objects.get_for_model(Timelike)
+        comment.content_type=GetObjectType(request.POST['content_type'])
         if (request.POST['isBasic']=='on'):
             comment.isBasic=True
         else:

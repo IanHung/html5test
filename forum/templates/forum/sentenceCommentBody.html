@@ -1,0 +1,17 @@
+<div class='row'>
+	<form id='form{{ sentence.id }}' action='' method='post'>
+		{% csrf_token %}{{ form.non_field.errors }}
+		<div class = 'span1'>
+			{{ form.comment.errors }}
+			<label for='id_comment'>
+				Comment:
+			</label>
+		</div>
+		<div class='span5'>
+			{{ form.comment }}
+		</div>
+		<div class='span1'>
+			<button class='btn mybtn' type='submit' id='submitbtn{{ sentence.id }}'>Submit</button>
+		</div>
+	</form>
+</div>
