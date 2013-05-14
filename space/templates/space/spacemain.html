@@ -5,14 +5,41 @@
 {% block head %}
 	<script type="text/javascript">
 		$(document).ready(function(){
-
 // This is to highlight a sentence when clicked on. And to pull the x,y position of the mouse to open a popup menu.
-		    $('.sentence').click(function(e){
+		    $('.sentence').click(function(){
     			$('.sentence').css('background-color', 'transparent');
    		    	$(this).css('background-color', '#ff9');
-   		    	$('#txt_context').css({'visibility':'visible', 'left':e.pageX, 'top':e.pageY+5});
+   		    	var xy = $(this).position();
+   		    	var w = $(this).width();
+   		    	var h = $('#txt_info').height();
+   		    	$('#txt_info').css({'visibility':'visible', 'left':xy.left+w, 'top':xy.top-h});
   		 	});
-
+  		 	
+  		 	$('#txt_info').click(function(){
+  		 		$(this).css({'visibility':'hidden'});
+  		 		var xy = $(this).position();
+  		 		$('#txt_context').css({'visibility':'visible', 'left':xy.left, 'top':xy.top});
+  		 	});
+  		 	
+  		 	$('#viewcomment').click(function(){
+  		 		$('#txt_comments').css({'visibility':'visible'});
+  		 		$('.tab-pane').removeClass('active');
+  		 		$('#thread1').addClass('active');
+  		 	});
+  		 	
+  		 	$('#addcomment').click(function(){
+  		 		$('#txt_comments').css({'visibility':'visible'});
+  		 		$('.tab-pane').removeClass('active');
+  		 		$('#newthread').addClass('active');
+  		 	});
+  		 	
+/* This function should hide things when you click on an empty place.
+ * Figure a lot of things should dismiss on click.
+ * It's commented out because I need to think of conflicts with the other actions on click.
+ *  	 	$().click(function(){
+ * 		 		$(#dismissOnClick).css({'visibility':'hidden'});
+ * 		 	}); 
+ */
 		});
     </script>
 {% endblock %}
@@ -27,7 +54,7 @@
 
 <div class="container">
 	<div class="row">
-		<div class="span6" style="border-style:solid">
+		<div class="span8" style="border-style:solid">
 			<div class="imgcontainer">
 				<div class="imgdiv_img">
 					<a href="#myModal" data-toggle="modal"><img class="alignnone" src="http://images2.wikia.nocookie.net/__cb20051121172739/uncyclopedia/images/1/13/The_Neitch.jpg" alt="" width="235" height="257" />
@@ -68,13 +95,84 @@
 					<p><img class="alignnone" src="http://media.npr.org/assets/img/2012/03/19/einstein-75dffc8af00c56b1cf93b7058f15af1360ac6bca-s6-c10.jpg" alt="" width="569" height="427" /></p>
 				</div>
 				<div class="imgdiv_options">
-					<p>haha</p>
+<!-- Because the image takes up the whole width, this options part is displayed beneath the image. I want it to the side.-->
+					<button class="btn"><i class="icon-tag"></i></button>
+					<button class="btn"><i class="icon-picture"></i></button>
+				</div>
+				<div class="imgdiv_captions">
 				</div>
 			</div>
 			<div class="txtcontainer">
 			<p><span class="sentence">To generate true knowledge you can't just collect data, hoping it will reach a critical mass and tell you what you need to know. </span><span class="sentence">You have to do what only humans can do, and get inside it, understand it. </span><span class="sentence">You have to make daring speculations that bring it all together. </span><span class="sentence">You have to leave your preconceptions behind, and all the things you want to believe. </span><span class="sentence">You have to imagine what it could all mean, and then test your imaginings, and watch them fail, and see how they fail, because seeing that leads you deeper still.</span></p>
 			<p><span class="sentence">More than any of this, you have to stare into the dark, and the real possibility that underneath our masks of reason, there is nothing in humans worth finding, or worse -- that what you will find will be genuinely horrendous, and that knowledge of our true nature will blank out all hope in our lives.</span></p>
 			<p><span class="sentence">This, I believe, is why it is that we collect data, and data, and yet more data but flinch from the deep conjectures that might make sense of it. </span><span class="sentence">We are afraid of what we might see. </span><span class="sentence">What it would mean. </span><span class="sentence">This is why science has failed to match its incredible advances in the external world with similar ones in the internal.</span></p>
+			</div>
+		</div>
+		<div class="span3" id="commentcolumn">
+
+<!-- comment system for text:
+		- text info popup (show how many comments, gives option to add more)
+		- context menu (same info as info popup really...)
+		- comment display div (shows different comment threads in different tabs)
+
+<!-- Info popup for text, this should display how many comments there are and have a button for adding comments -->
+			<div id="txt_info" style="visibility:hidden;z-index=2;position:absolute; top:0px; left:0px;">
+<!-- I want the content here to look like a speech bubble with the number of comments inside. And upon hover, turn into a plus sign -->
+				<a class="btn" id="txt_info_button">
+					<div id="firstbtn">12</div>
+					<div id="secondbtn"><i class="icon-pencil"></i></div>
+				</a>
+			</div>
+
+<!-- Context menu for text -->
+			<div id="txt_context" style="visibility:hidden; z-index=1; position:absolute; top:0px; left:0px; border-style:solid; background:white;">
+				<div id="txt_context_header" style="padding:0.25em">
+					<i class="icon-pencil" style="float:left"></i>
+					<a href="#"><i class="icon-remove" style="float:right"></i></a>
+				</div>
+				<div id="txt_context_menu">
+					<ul>
+						<li>12 comments</li>
+<!-- the following links should automatically load up the relevant tabs in the modal -->
+						<li><a id="addcomment">Add comment</a></li>
+						<li><a id="viewcomment">View comment</a></li>
+					</ul>
+				</div>
+			</div>
+
+<!-- Container to display the text comments 
+	Normally translucent (opaque 50%) but becomes opaque on hover.
+	-->
+			<div id="txt_comments">
+				<div class="txt_comment-header">
+					<ul class="nav nav-tabs">
+						<li><a href="#thread1" data-toggle="tab">Thread 1</a></li>
+						<li><a href="#thread2" data-toggle="tab">Thread 2</a></li>
+						<li><a href="#thread3" data-toggle="tab">Thread 3</a></li>
+						<li><a href="#newthread" data-toggle="tab">New thread</a></li>
+					</ul>
+				</div>
+				<div class="txt_comment-body">
+<!-- The tab contents needs to be pulled from the database and we need a better id method -->
+					<div class="tab-content">
+						<div class="tab-pane" id="thread1">
+							<p>There is the first comment thread. I need to be able to pull this from database.</p>
+						</div>
+						<div class="tab-pane" id="thread2">
+							<p>This is the second comment thread.</p>
+						</div>
+						<div class="tab-pane" id="thread3">
+							<p>This is the third.</p>
+						</div>
+						<div class="tab-pane" id="newthread">
+							<p>Comment adding forms here</p>
+						</div>
+					</div>
+				</div>
+				<div class="txt_comment-footer">
+					<a href="#" class="btn">Close</a>
+					<a href="#" class="btn btn-primary">Save changes</a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -99,15 +197,6 @@
 
 <!-- Context menu for images -->
 
-<!-- info menu for text, this should display how many comments there are and have a button for adding comments -->
-<div id="txt_info" style="visibility:hidden;z-index=2;position:absolute; top:0px; left:0px;">
-	<p>12</p>
-</div>
-
-<!-- Context menu for text -->
-<div id="txt_context" style="visibility:hidden; z-index=1; position:absolute; top:0px; left:0px;">
-	<i class="icon-pencil"></i>
-</div>
 
 <!-- Check for Zepto support, load jQuery if necessary -->
 <script>
