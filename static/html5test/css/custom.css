@@ -215,3 +215,20 @@ div#firstbtn{display: block;}
 div#secondbtn{display: none;}
 a#txt_info_button:hover div:first-child{display: none;}
 a#txt_info_button:hover div:nth-child(2){display: block;}
+
+/* This controls the text comment display box */
+#txt_comments>div {
+	padding: -1px;
+	border: 1px solid blue;
+}
+
+#txt_comments {
+	visibility: hidden;
+	opacity: 0.5;
+	position: fixed;
+	width: 30em;
+}
+
+#txt_comments:hover {
+	opacity: 1;
+}
