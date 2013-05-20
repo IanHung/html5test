@@ -246,3 +246,7 @@ a#txt_info_button:hover div:nth-child(2){display: block;}
 #txt_comments:hover {
 	opacity: 1;
 }
+
+.popover {
+	max-width: 400px;
+}

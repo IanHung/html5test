@@ -48,15 +48,36 @@
 			 	target: "video{{ Timelike.id }}transcriptFull{{ comment.id }}"
 			 	
 			 });
-
-			 $("#video{{ Timelike.id }}transcript{{ comment.id }}").click(function(){
-			 			time{{ Timelike.id }}.play();
-			 			time{{ Timelike.id }}.currentTime( {{ comment.start }} );
+			 
+			 $("#video{{ Timelike.id }}transcript{{ comment.id }}").popover({
+			 			html : true,
+			 			placement: "bottom",
+			 			content: function() {
+			 				return $(".video{{ Timelike.id }}transcript{{ comment.id }}menu").html();
+			 			},
+			 			container: "#video{{ Timelike.id }}transcript{{ comment.id }}"
 			 });
-			 $("#video{{ Timelike.id }}transcriptFull{{ comment.id }}").click(function(){
+			 $("#video{{ Timelike.id }}transcriptFull{{ comment.id }}").popover({
+			 			html : true,
+			 			placement: "bottom",
+			 			content: function() {
+			 				return $(".video{{ Timelike.id }}transcript{{ comment.id }}menu").html();
+			 			},
+			 			container: "#video{{ Timelike.id }}transcriptFull{{ comment.id }}"
+
+			 });
+			 $("#video{{ Timelike.id }}transcript{{ comment.id }}").on("click", ".video{{ Timelike.id }}transcript{{ comment.id }}goto", function(){
+			 			$("#video{{ Timelike.id }}transcript{{ comment.id }}").popover('destroy');
 			 			time{{ Timelike.id }}.play();
 			 			time{{ Timelike.id }}.currentTime( {{ comment.start }} );
-			 });				 
+			 			
+			 });
+			 $("#video{{ Timelike.id }}transcript{{ comment.id }}").on("click", ".video{{ Timelike.id }}transcript{{ comment.id }}goto", function(){
+			 			time{{ Timelike.id }}.play();
+			 			time{{ Timelike.id }}.currentTime( {{ comment.start }} );
+			 			
+			 });
+		 
 			 {% endfor %}
 			 {% endif %}
 	 		 {% endfor %}

@@ -6,6 +6,7 @@ from django.contrib.contenttypes.models import ContentType
 from forum.forms import CommentForm
 from timeview.models import Timelike
 from django.shortcuts import HttpResponse
+from space.models import ImageClass, Paragraph
 
 def GetObjectType(typeID):
     if(typeID==1):
@@ -13,7 +14,7 @@ def GetObjectType(typeID):
     elif(typeID==2):
         return ContentType.objects.get_for_model(ImageClass)
     elif(typeID==3):
-        return ContentType.objects.get_for_model(Sentence)
+        return ContentType.objects.get_for_model(Paragraph)
 
 def PostComment(request):
     commentform = CommentForm(request.POST)

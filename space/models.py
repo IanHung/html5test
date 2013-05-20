@@ -9,7 +9,7 @@ class Paragraph(models.Model):
     author = models.ForeignKey(User, blank=True, null=True)
     comment = generic.GenericRelation(Comment)
 
-class Imageclass(models.Model):
+class ImageClass(models.Model):
     #basic fields
     author = models.ForeignKey(User, blank=True, null=True)
     comment = generic.GenericRelation(Comment)
