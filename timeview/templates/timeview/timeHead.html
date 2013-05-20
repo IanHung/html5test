@@ -55,7 +55,11 @@
 			 			content: function() {
 			 				return $(".video{{ Timelike.id }}transcript{{ comment.id }}menu").html();
 			 			},
-			 			container: "#video{{ Timelike.id }}transcript{{ comment.id }}"
+			 			container: "#transcriptLive{{ Timelike.id }}",
+			 			trigger: "manual"
+			 }).click(function(e){
+			 	$(".popover").hide();
+			 	$(this).popover('show');
 			 });
 			 $("#video{{ Timelike.id }}transcriptFull{{ comment.id }}").popover({
 			 			html : true,
@@ -63,19 +67,24 @@
 			 			content: function() {
 			 				return $(".video{{ Timelike.id }}transcript{{ comment.id }}menu").html();
 			 			},
-			 			container: "#video{{ Timelike.id }}transcriptFull{{ comment.id }}"
+			 			container: "#transcriptFull{{ Timelike.id }}",
+			 			trigger: "manual"
 
+			 }).click(function(e){
+			 	$(".popover").hide();
+			 	$(this).popover('show');
 			 });
-			 $("#video{{ Timelike.id }}transcript{{ comment.id }}").on("click", ".video{{ Timelike.id }}transcript{{ comment.id }}goto", function(){
+			 $(".col3").on("click", ".video{{ Timelike.id }}transcript{{ comment.id }}goto", function(e){
 			 			$("#video{{ Timelike.id }}transcript{{ comment.id }}").popover('destroy');
 			 			time{{ Timelike.id }}.play();
 			 			time{{ Timelike.id }}.currentTime( {{ comment.start }} );
-			 			
+			 			e.preventDefault();
 			 });
-			 $("#video{{ Timelike.id }}transcript{{ comment.id }}").on("click", ".video{{ Timelike.id }}transcript{{ comment.id }}goto", function(){
+			 $(".col3").on("click", ".video{{ Timelike.id }}transcript{{ comment.id }}goto", function(e){
+			 			$("#video{{ Timelike.id }}transcriptFull{{ comment.id }}").popover('destroy');
 			 			time{{ Timelike.id }}.play();
 			 			time{{ Timelike.id }}.currentTime( {{ comment.start }} );
-			 			
+			 			e.preventDefault();
 			 });
 		 
 			 {% endfor %}
@@ -90,7 +99,15 @@
 				   $("#subtitle{{ Timelike.id }}").toggle();
 				   $("#sidemenu{{ Timelike.id }}").toggle();
 				});
+ 							
 			   {% endfor %}
+			   
+			 $('body').on("click",function(e){
+				
+				if ( !($(e.target).parents('.popover').hasClass('popover')) && !$(e.target).parents('.col3').hasClass('col3') ) {
+							$(".popover").hide();
+				}
+			 });
 			   
 	      });
 	    </script>
