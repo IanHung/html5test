@@ -13,18 +13,5 @@
 		<div class='span1'>
 			<button class='btn mybtn' type='submit' id='submitbtn{{ ImageClass.id }}'>Submit</button>
 		</div>
-		{% if ImageClass.author %}
-		<div class='row {{ ImageClass.author.username }} user small-height'>
-			{% if ImageClass.author.username == user.username %}
-				<div class="span1 offset6 text-right">
-					<p>Side?</p>
-				</div>
-				<div class="span1 text-vcentre">
-					 <input id="id_comment{{ ImageClass.id }}" type="checkbox" name="isBasic" checked="checked"/>
-				</div>
-
-			{% endif %}
-		</div>
-		{% endif %}
 	</form>
 </div>

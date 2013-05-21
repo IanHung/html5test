@@ -2,88 +2,88 @@
 			$('input.comment').on('keyup', function() {
 			  $(this).next('.mybtn').click();
 			});
-			{% for Timelike in timelike_list %}		
-			$('#form{{ Timelike.id }}').submit(function(event{{ Timelike.id }}) {
+			{% for Sentence in Sentence_list %}		
+			$('#form{{ Sentence.id }}').submit(function(event{{ Sentence.id }}) {
 				//do some form cleaning here
 				
-				var end{{ Timelike.id }} = time{{ Timelike.id }}.currentTime()+10;
-				var endPost{{ Timelike.id }} = '&end=' + end{{ Timelike.id }};
-				var authorPost{{ Timelike.id }} = '&author=1';				
-				var titlePost{{ Timelike.id }} = '&title=' +"Timelike " + {{ Timelike.id }} +" at "+time{{ Timelike.id }}.currentTime() +" " + Date();
+				var end{{ Sentence.id }} = time{{ Sentence.id }}.currentTime()+10;
+				var endPost{{ Sentence.id }} = '&end=' + end{{ Sentence.id }};
+				var authorPost{{ Sentence.id }} = '&author=1';				
+				var titlePost{{ Sentence.id }} = '&title=' +"Sentence " + {{ Sentence.id }} +" at "+time{{ Sentence.id }}.currentTime() +" " + Date();
 				
-				var objectidPost{{ Timelike.id }} = '&object_id={{ Timelike.id }}';
-				var start{{ Timelike.id }} = time{{ Timelike.id }}.currentTime();
-				var startPost{{ Timelike.id }} = '&start=' + start{{ Timelike.id }};
-				var contenttypePost{{ Timelike.id }} = '&content_type=10';
+				var objectidPost{{ Sentence.id }} = '&object_id={{ Sentence.id }}';
+				var start{{ Sentence.id }} = time{{ Sentence.id }}.currentTime();
+				var startPost{{ Sentence.id }} = '&start=' + start{{ Sentence.id }};
+				var contenttypePost{{ Sentence.id }} = '&content_type=3';
 				
-				if ($('#id_comment{{ Timelike.id }}').prop('checked')){
-					var totalData = $(this).serialize() +  endPost{{ Timelike.id }} + authorPost{{ Timelike.id }} + titlePost{{ Timelike.id }} + objectidPost{{ Timelike.id }} + startPost{{ Timelike.id }} + contenttypePost{{ Timelike.id }};
+				if ($('#id_comment{{ Sentence.id }}').prop('checked')){
+					var totalData = $(this).serialize() +  endPost{{ Sentence.id }} + authorPost{{ Sentence.id }} + titlePost{{ Sentence.id }} + objectidPost{{ Sentence.id }} + startPost{{ Sentence.id }} + contenttypePost{{ Sentence.id }};
 				}
 				else {
-					var totalData =	$(this).serialize() +  endPost{{ Timelike.id }} + authorPost{{ Timelike.id }} + titlePost{{ Timelike.id }} + objectidPost{{ Timelike.id }} + startPost{{ Timelike.id }} + contenttypePost{{ Timelike.id }} +'&isBasic=False';
+					var totalData =	$(this).serialize() +  endPost{{ Sentence.id }} + authorPost{{ Sentence.id }} + titlePost{{ Sentence.id }} + objectidPost{{ Sentence.id }} + startPost{{ Sentence.id }} + contenttypePost{{ Sentence.id }} +'&isBasic=False';
 				}
 				$.ajax({
 					url:"{% url 'timeview' %}",
 					data: totalData,
 					type: "POST",
 					dataType: "json",
-					success: function( data{{ Timelike.id }} ) {
+					success: function( data{{ Sentence.id }} ) {
 						
-						var contain{{ Timelike.id }} = "video" +data{{ Timelike.id }}.object_id + "footnote" + data{{ Timelike.id }}.id;
-						var containhtml{{ Timelike.id }} = '<h4 id="' + contain{{ Timelike.id }} + '"></h4>';
-						var containtran{{ Timelike.id }} = "video" +data{{ Timelike.id }}.object_id + "transcript" + data{{ Timelike.id }}.id;
-						var containtranhtml{{ Timelike.id }} = '<h4 id="' + containtran{{ Timelike.id }} + '"></h4>';			
-						var prevhtml{{ Timelike.id }} = "#video" +data{{ Timelike.id }}.object_id + "transcript" + data{{ Timelike.id }}.previd;
-						var containtranFull{{ Timelike.id }} = "video" +data{{ Timelike.id }}.object_id + "transcriptFull" + data{{ Timelike.id }}.id;
-						var containtranFullhtml{{ Timelike.id }} = '<h4 id="' + containtranFull{{ Timelike.id }} + '"></h4>';
-						var prevFullhtml{{ Timelike.id }} = "#video" +data{{ Timelike.id }}.object_id + "transcriptFull" + data{{ Timelike.id }}.previd;	
+						var contain{{ Sentence.id }} = "video" +data{{ Sentence.id }}.object_id + "footnote" + data{{ Sentence.id }}.id;
+						var containhtml{{ Sentence.id }} = '<h4 id="' + contain{{ Sentence.id }} + '"></h4>';
+						var containtran{{ Sentence.id }} = "video" +data{{ Sentence.id }}.object_id + "transcript" + data{{ Sentence.id }}.id;
+						var containtranhtml{{ Sentence.id }} = '<h4 id="' + containtran{{ Sentence.id }} + '"></h4>';			
+						var prevhtml{{ Sentence.id }} = "#video" +data{{ Sentence.id }}.object_id + "transcript" + data{{ Sentence.id }}.previd;
+						var containtranFull{{ Sentence.id }} = "video" +data{{ Sentence.id }}.object_id + "transcriptFull" + data{{ Sentence.id }}.id;
+						var containtranFullhtml{{ Sentence.id }} = '<h4 id="' + containtranFull{{ Sentence.id }} + '"></h4>';
+						var prevFullhtml{{ Sentence.id }} = "#video" +data{{ Sentence.id }}.object_id + "transcriptFull" + data{{ Sentence.id }}.previd;	
 						
-						if(data{{ Timelike.id }}.isBasic){
-							$("#sidemenu{{ Timelike.id }}").find('#text{{ Timelike.id }}').append(containhtml{{ Timelike.id }});
+						if(data{{ Sentence.id }}.isBasic){
+							$("#sidemenu{{ Sentence.id }}").find('#text{{ Sentence.id }}').append(containhtml{{ Sentence.id }});
 						}
 						else{
-							$("#subtitle{{ Timelike.id }}").find('.timelikecomment').append(containhtml{{ Timelike.id }});
+							$("#subtitle{{ Sentence.id }}").find('.Sentencecomment').append(containhtml{{ Sentence.id }});
 						}
 						
 						
-							if ( data{{ Timelike.id }}.previd != data{{ Timelike.id }}.id ){
+							if ( data{{ Sentence.id }}.previd != data{{ Sentence.id }}.id ){
 								
-								$("#transcriptLive{{ Timelike.id }}").find(prevhtml{{ Timelike.id }}).before(containtranhtml{{ Timelike.id }});
-								$("#transcriptFull{{ Timelike.id }}").find(prevFullhtml{{ Timelike.id }}).before(containtranFullhtml{{ Timelike.id }});
+								$("#transcriptLive{{ Sentence.id }}").find(prevhtml{{ Sentence.id }}).before(containtranhtml{{ Sentence.id }});
+								$("#transcriptFull{{ Sentence.id }}").find(prevFullhtml{{ Sentence.id }}).before(containtranFullhtml{{ Sentence.id }});
 							}
 							else {
-								$("#transcriptLive{{ Timelike.id }}").append(containtranhtml{{ Timelike.id }});
-								$("#transcriptFull{{ Timelike.id }}").append(containtranFullhtml{{ Timelike.id }});
+								$("#transcriptLive{{ Sentence.id }}").append(containtranhtml{{ Sentence.id }});
+								$("#transcriptFull{{ Sentence.id }}").append(containtranFullhtml{{ Sentence.id }});
 							}
 							
 							
-						time{{ Timelike.id }}.footnote({
-						 	start: data{{ Timelike.id }}.start,
-						 	end: data{{ Timelike.id }}.end,
-						 	text: data{{ Timelike.id }}.comment,
-						 	target: contain{{ Timelike.id }},
+						time{{ Sentence.id }}.footnote({
+						 	start: data{{ Sentence.id }}.start,
+						 	end: data{{ Sentence.id }}.end,
+						 	text: data{{ Sentence.id }}.comment,
+						 	target: contain{{ Sentence.id }},
 					 	});
 					 	
-					 	time{{ Timelike.id }}.footnote({
-						 	start: data{{ Timelike.id }}.start,
-						 	text: Math.floor(data{{ Timelike.id }}.start) + "s "+ data{{ Timelike.id }}.comment,
-						 	target: containtran{{ Timelike.id }},
+					 	time{{ Sentence.id }}.footnote({
+						 	start: data{{ Sentence.id }}.start,
+						 	text: Math.floor(data{{ Sentence.id }}.start) + "s "+ data{{ Sentence.id }}.comment,
+						 	target: containtran{{ Sentence.id }},
 					 	});
 					 	
-					 	time{{ Timelike.id }}.footnote({
+					 	time{{ Sentence.id }}.footnote({
 						 	start: 0,
-						 	text: Math.floor(data{{ Timelike.id }}.start) + "s "+ data{{ Timelike.id }}.comment,
-						 	target: containtranFull{{ Timelike.id }},
+						 	text: Math.floor(data{{ Sentence.id }}.start) + "s "+ data{{ Sentence.id }}.comment,
+						 	target: containtranFull{{ Sentence.id }},
 					 	});
 					 	
-					 	$("#" + containtran{{ Timelike.id }}).click(function(){
-			 				time{{ Timelike.id }}.play();
-			 				time{{ Timelike.id }}.currentTime( data{{ Timelike.id }}.start );
+					 	$("#" + containtran{{ Sentence.id }}).click(function(){
+			 				time{{ Sentence.id }}.play();
+			 				time{{ Sentence.id }}.currentTime( data{{ Sentence.id }}.start );
 						 });
 						 
-						 $("#" + containtranFull{{ Timelike.id }}).click(function(){
-			 				time{{ Timelike.id }}.play();
-			 				time{{ Timelike.id }}.currentTime( data{{ Timelike.id }}.start );
+						 $("#" + containtranFull{{ Sentence.id }}).click(function(){
+			 				time{{ Sentence.id }}.play();
+			 				time{{ Sentence.id }}.currentTime( data{{ Sentence.id }}.start );
 						 });		
 						
 						
@@ -94,11 +94,11 @@
 					},
 					
 					complete: function( xhr, status ) {
-						$('#form{{ Timelike.id }}')[0].reset();
+						$('#form{{ Sentence.id }}')[0].reset();
 					},
 										
 				});
-				event{{ Timelike.id }}.preventDefault();
+				event{{ Sentence.id }}.preventDefault();
 			});
 			{% endfor %}
 					

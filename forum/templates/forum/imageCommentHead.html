@@ -2,88 +2,88 @@
 			$('input.comment').on('keyup', function() {
 			  $(this).next('.mybtn').click();
 			});
-			{% for Timelike in timelike_list %}		
-			$('#form{{ Timelike.id }}').submit(function(event{{ Timelike.id }}) {
+			{% for ImageClass in ImageClass_list %}		
+			$('#form{{ ImageClass.id }}').submit(function(event{{ ImageClass.id }}) {
 				//do some form cleaning here
 				
-				var end{{ Timelike.id }} = time{{ Timelike.id }}.currentTime()+10;
-				var endPost{{ Timelike.id }} = '&end=' + end{{ Timelike.id }};
-				var authorPost{{ Timelike.id }} = '&author=1';				
-				var titlePost{{ Timelike.id }} = '&title=' +"Timelike " + {{ Timelike.id }} +" at "+time{{ Timelike.id }}.currentTime() +" " + Date();
+				var end{{ ImageClass.id }} = time{{ ImageClass.id }}.currentTime()+10;
+				var endPost{{ ImageClass.id }} = '&end=' + end{{ ImageClass.id }};
+				var authorPost{{ ImageClass.id }} = '&author=1';				
+				var titlePost{{ ImageClass.id }} = '&title=' +"ImageClass " + {{ ImageClass.id }} +" at "+time{{ ImageClass.id }}.currentTime() +" " + Date();
 				
-				var objectidPost{{ Timelike.id }} = '&object_id={{ Timelike.id }}';
-				var start{{ Timelike.id }} = time{{ Timelike.id }}.currentTime();
-				var startPost{{ Timelike.id }} = '&start=' + start{{ Timelike.id }};
-				var contenttypePost{{ Timelike.id }} = '&content_type=10';
+				var objectidPost{{ ImageClass.id }} = '&object_id={{ ImageClass.id }}';
+				var start{{ ImageClass.id }} = time{{ ImageClass.id }}.currentTime();
+				var startPost{{ ImageClass.id }} = '&start=' + start{{ ImageClass.id }};
+				var contenttypePost{{ ImageClass.id }} = '&content_type=2';
 				
-				if ($('#id_comment{{ Timelike.id }}').prop('checked')){
-					var totalData = $(this).serialize() +  endPost{{ Timelike.id }} + authorPost{{ Timelike.id }} + titlePost{{ Timelike.id }} + objectidPost{{ Timelike.id }} + startPost{{ Timelike.id }} + contenttypePost{{ Timelike.id }};
+				if ($('#id_comment{{ ImageClass.id }}').prop('checked')){
+					var totalData = $(this).serialize() +  endPost{{ ImageClass.id }} + authorPost{{ ImageClass.id }} + titlePost{{ ImageClass.id }} + objectidPost{{ ImageClass.id }} + startPost{{ ImageClass.id }} + contenttypePost{{ ImageClass.id }};
 				}
 				else {
-					var totalData =	$(this).serialize() +  endPost{{ Timelike.id }} + authorPost{{ Timelike.id }} + titlePost{{ Timelike.id }} + objectidPost{{ Timelike.id }} + startPost{{ Timelike.id }} + contenttypePost{{ Timelike.id }} +'&isBasic=False';
+					var totalData =	$(this).serialize() +  endPost{{ ImageClass.id }} + authorPost{{ ImageClass.id }} + titlePost{{ ImageClass.id }} + objectidPost{{ ImageClass.id }} + startPost{{ ImageClass.id }} + contenttypePost{{ ImageClass.id }} +'&isBasic=False';
 				}
 				$.ajax({
 					url:"{% url 'timeview' %}",
 					data: totalData,
 					type: "POST",
 					dataType: "json",
-					success: function( data{{ Timelike.id }} ) {
+					success: function( data{{ ImageClass.id }} ) {
 						
-						var contain{{ Timelike.id }} = "video" +data{{ Timelike.id }}.object_id + "footnote" + data{{ Timelike.id }}.id;
-						var containhtml{{ Timelike.id }} = '<h4 id="' + contain{{ Timelike.id }} + '"></h4>';
-						var containtran{{ Timelike.id }} = "video" +data{{ Timelike.id }}.object_id + "transcript" + data{{ Timelike.id }}.id;
-						var containtranhtml{{ Timelike.id }} = '<h4 id="' + containtran{{ Timelike.id }} + '"></h4>';			
-						var prevhtml{{ Timelike.id }} = "#video" +data{{ Timelike.id }}.object_id + "transcript" + data{{ Timelike.id }}.previd;
-						var containtranFull{{ Timelike.id }} = "video" +data{{ Timelike.id }}.object_id + "transcriptFull" + data{{ Timelike.id }}.id;
-						var containtranFullhtml{{ Timelike.id }} = '<h4 id="' + containtranFull{{ Timelike.id }} + '"></h4>';
-						var prevFullhtml{{ Timelike.id }} = "#video" +data{{ Timelike.id }}.object_id + "transcriptFull" + data{{ Timelike.id }}.previd;	
+						var contain{{ ImageClass.id }} = "video" +data{{ ImageClass.id }}.object_id + "footnote" + data{{ ImageClass.id }}.id;
+						var containhtml{{ ImageClass.id }} = '<h4 id="' + contain{{ ImageClass.id }} + '"></h4>';
+						var containtran{{ ImageClass.id }} = "video" +data{{ ImageClass.id }}.object_id + "transcript" + data{{ ImageClass.id }}.id;
+						var containtranhtml{{ ImageClass.id }} = '<h4 id="' + containtran{{ ImageClass.id }} + '"></h4>';			
+						var prevhtml{{ ImageClass.id }} = "#video" +data{{ ImageClass.id }}.object_id + "transcript" + data{{ ImageClass.id }}.previd;
+						var containtranFull{{ ImageClass.id }} = "video" +data{{ ImageClass.id }}.object_id + "transcriptFull" + data{{ ImageClass.id }}.id;
+						var containtranFullhtml{{ ImageClass.id }} = '<h4 id="' + containtranFull{{ ImageClass.id }} + '"></h4>';
+						var prevFullhtml{{ ImageClass.id }} = "#video" +data{{ ImageClass.id }}.object_id + "transcriptFull" + data{{ ImageClass.id }}.previd;	
 						
-						if(data{{ Timelike.id }}.isBasic){
-							$("#sidemenu{{ Timelike.id }}").find('#text{{ Timelike.id }}').append(containhtml{{ Timelike.id }});
+						if(data{{ ImageClass.id }}.isBasic){
+							$("#sidemenu{{ ImageClass.id }}").find('#text{{ ImageClass.id }}').append(containhtml{{ ImageClass.id }});
 						}
 						else{
-							$("#subtitle{{ Timelike.id }}").find('.timelikecomment').append(containhtml{{ Timelike.id }});
+							$("#subtitle{{ ImageClass.id }}").find('.ImageClasscomment').append(containhtml{{ ImageClass.id }});
 						}
 						
 						
-							if ( data{{ Timelike.id }}.previd != data{{ Timelike.id }}.id ){
+							if ( data{{ ImageClass.id }}.previd != data{{ ImageClass.id }}.id ){
 								
-								$("#transcriptLive{{ Timelike.id }}").find(prevhtml{{ Timelike.id }}).before(containtranhtml{{ Timelike.id }});
-								$("#transcriptFull{{ Timelike.id }}").find(prevFullhtml{{ Timelike.id }}).before(containtranFullhtml{{ Timelike.id }});
+								$("#transcriptLive{{ ImageClass.id }}").find(prevhtml{{ ImageClass.id }}).before(containtranhtml{{ ImageClass.id }});
+								$("#transcriptFull{{ ImageClass.id }}").find(prevFullhtml{{ ImageClass.id }}).before(containtranFullhtml{{ ImageClass.id }});
 							}
 							else {
-								$("#transcriptLive{{ Timelike.id }}").append(containtranhtml{{ Timelike.id }});
-								$("#transcriptFull{{ Timelike.id }}").append(containtranFullhtml{{ Timelike.id }});
+								$("#transcriptLive{{ ImageClass.id }}").append(containtranhtml{{ ImageClass.id }});
+								$("#transcriptFull{{ ImageClass.id }}").append(containtranFullhtml{{ ImageClass.id }});
 							}
 							
 							
-						time{{ Timelike.id }}.footnote({
-						 	start: data{{ Timelike.id }}.start,
-						 	end: data{{ Timelike.id }}.end,
-						 	text: data{{ Timelike.id }}.comment,
-						 	target: contain{{ Timelike.id }},
+						time{{ ImageClass.id }}.footnote({
+						 	start: data{{ ImageClass.id }}.start,
+						 	end: data{{ ImageClass.id }}.end,
+						 	text: data{{ ImageClass.id }}.comment,
+						 	target: contain{{ ImageClass.id }},
 					 	});
 					 	
-					 	time{{ Timelike.id }}.footnote({
-						 	start: data{{ Timelike.id }}.start,
-						 	text: Math.floor(data{{ Timelike.id }}.start) + "s "+ data{{ Timelike.id }}.comment,
-						 	target: containtran{{ Timelike.id }},
+					 	time{{ ImageClass.id }}.footnote({
+						 	start: data{{ ImageClass.id }}.start,
+						 	text: Math.floor(data{{ ImageClass.id }}.start) + "s "+ data{{ ImageClass.id }}.comment,
+						 	target: containtran{{ ImageClass.id }},
 					 	});
 					 	
-					 	time{{ Timelike.id }}.footnote({
+					 	time{{ ImageClass.id }}.footnote({
 						 	start: 0,
-						 	text: Math.floor(data{{ Timelike.id }}.start) + "s "+ data{{ Timelike.id }}.comment,
-						 	target: containtranFull{{ Timelike.id }},
+						 	text: Math.floor(data{{ ImageClass.id }}.start) + "s "+ data{{ ImageClass.id }}.comment,
+						 	target: containtranFull{{ ImageClass.id }},
 					 	});
 					 	
-					 	$("#" + containtran{{ Timelike.id }}).click(function(){
-			 				time{{ Timelike.id }}.play();
-			 				time{{ Timelike.id }}.currentTime( data{{ Timelike.id }}.start );
+					 	$("#" + containtran{{ ImageClass.id }}).click(function(){
+			 				time{{ ImageClass.id }}.play();
+			 				time{{ ImageClass.id }}.currentTime( data{{ ImageClass.id }}.start );
 						 });
 						 
-						 $("#" + containtranFull{{ Timelike.id }}).click(function(){
-			 				time{{ Timelike.id }}.play();
-			 				time{{ Timelike.id }}.currentTime( data{{ Timelike.id }}.start );
+						 $("#" + containtranFull{{ ImageClass.id }}).click(function(){
+			 				time{{ ImageClass.id }}.play();
+			 				time{{ ImageClass.id }}.currentTime( data{{ ImageClass.id }}.start );
 						 });		
 						
 						
@@ -94,11 +94,11 @@
 					},
 					
 					complete: function( xhr, status ) {
-						$('#form{{ Timelike.id }}')[0].reset();
+						$('#form{{ ImageClass.id }}')[0].reset();
 					},
 										
 				});
-				event{{ Timelike.id }}.preventDefault();
+				event{{ ImageClass.id }}.preventDefault();
 			});
 			{% endfor %}
 					
