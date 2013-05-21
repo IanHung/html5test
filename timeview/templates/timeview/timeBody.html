@@ -55,12 +55,30 @@
 											{% for comment in Timelike.comment.all %}
 												<h4 id="video{{ Timelike.id }}transcript{{ comment.id }}"></h4>
 												<div class="video{{ Timelike.id }}transcript{{ comment.id }}menu popover" hidden>
-													<div class="navbar">
-														<ul class="nav nav-tabs">
-															<li><a class="video{{ Timelike.id }}transcript{{ comment.id }}goto" href="#">Go to</a></li>
-  															<li><a class="video{{ Timelike.id }}transcript{{ comment.id }}thread" href="#">View Thread</a></li>
-  															<li><a class="video{{ Timelike.id }}transcript{{ comment.id }}newcomment" href="#">Comment</a></li>
-														</ul>	
+													<div class="">
+														<div class="navbar">
+															<ul class="nav nav-tabs">
+																<li><a class="video{{ Timelike.id }}transcript{{ comment.id }}goto" href="#">Go to</a></li>
+	  															<li><a class="video{{ Timelike.id }}transcript{{ comment.id }}thread" href="#">View Thread</a></li>
+	  															<li><a class="video{{ Timelike.id }}transcript{{ comment.id }}newcomment" data-toggle="collapse" href=".transcript{{ Timelike.id }}comment{{ comment.id }}">Comment</a></li>
+															</ul>	
+														</div>
+													</div>
+													<div class="row">
+														<div class="span3">
+														<form class="transcript{{ Timelike.id }}comment{{ comment.id }} collapse" action='' method="post">{% csrf_token %}
+															<div class="row">
+																<div class="span3">
+													          	<textarea name="comment" class="popovertextarea"> </textarea>
+													          	</div>
+												          	</div>
+												        	<div class="row">
+												        		<div class="span3">											        
+													        	<button type="submit" class="btn mybtn">Submit</button>
+													        	</div>
+												        	</div>
+													    </form>
+													   </div>
 													</div>
 												</div>
 											{% endfor %}

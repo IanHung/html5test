@@ -248,5 +248,17 @@ a#txt_info_button:hover div:nth-child(2){display: block;}
 }
 
 .popover {
-	max-width: 400px;
+	max-width: 350px;
 }
+
+.popover-content .popover-title {
+	padding: 0px;
+}
+
+.popovertextarea {
+	width: 94%;
+	min-height: 200px;
+	
+}
+
+

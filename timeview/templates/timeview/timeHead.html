@@ -55,7 +55,7 @@
 			 			content: function() {
 			 				return $(".video{{ Timelike.id }}transcript{{ comment.id }}menu").html();
 			 			},
-			 			container: "#transcriptLive{{ Timelike.id }}",
+			 			container: "body",
 			 			trigger: "manual"
 			 }).click(function(e){
 			 	$(".popover").hide();
@@ -67,21 +67,16 @@
 			 			content: function() {
 			 				return $(".video{{ Timelike.id }}transcript{{ comment.id }}menu").html();
 			 			},
-			 			container: "#transcriptFull{{ Timelike.id }}",
+			 			container: "body",
 			 			trigger: "manual"
 
 			 }).click(function(e){
 			 	$(".popover").hide();
 			 	$(this).popover('show');
 			 });
-			 $(".col3").on("click", ".video{{ Timelike.id }}transcript{{ comment.id }}goto", function(e){
-			 			$("#video{{ Timelike.id }}transcript{{ comment.id }}").popover('destroy');
-			 			time{{ Timelike.id }}.play();
-			 			time{{ Timelike.id }}.currentTime( {{ comment.start }} );
-			 			e.preventDefault();
-			 });
-			 $(".col3").on("click", ".video{{ Timelike.id }}transcript{{ comment.id }}goto", function(e){
-			 			$("#video{{ Timelike.id }}transcriptFull{{ comment.id }}").popover('destroy');
+
+			 $("body").on("click", ".video{{ Timelike.id }}transcript{{ comment.id }}goto", function(e){
+			 			$(".popover").hide();
 			 			time{{ Timelike.id }}.play();
 			 			time{{ Timelike.id }}.currentTime( {{ comment.start }} );
 			 			e.preventDefault();
