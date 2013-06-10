@@ -28,7 +28,7 @@ def PostComment(request):
         comment.start=request.POST['start']
         comment.title=request.POST['title']
         comment.object_id=request.POST['object_id']
-        comment.content_type=GetObjectType(request.POST['content_type'])
+        comment.content_type=GetObjectType(int(request.POST['content_type']))
         if (request.POST['isBasic']=='on'):
             comment.isBasic=True
         else:
