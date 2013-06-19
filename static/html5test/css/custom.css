@@ -261,4 +261,65 @@ a#txt_info_button:hover div:nth-child(2){display: block;}
 	
 }
 
+.colour1 {
+	background-color: #f25430;
+}
 
+.colour2 {
+	background-color: #3fc8d2;
+}
+
+.colour3 {
+	background-color: #F80;
+}
+
+.colour4 {
+	background-color: #0F8;
+}
+
+.category {
+	text-align:center;
+}
+/*
+#plotGarden {
+    width: 1200px;
+    margin: 0 auto;
+}
+ 
+/*Media Queries
+@media only screen and (max-width : 1199px),
+only screen and (max-device-width : 1199px){
+    #plotGarden {
+        width: 1000px;
+    }
+}
+ 
+ 
+@media only screen and (max-width : 999px),
+only screen and (max-device-width : 999px){
+   #plotGarden {
+        width: 800px;
+    }
+}
+ 
+@media only screen and (max-width : 799px),
+only screen and (max-device-width : 799px){
+    #plotGarden {
+        width: 600px;
+    }
+}
+ 
+@media only screen and (max-width : 599px),
+only screen and (max-device-width : 599px){
+    #container {
+        width: 400px;
+    }
+}
+ 
+@media only screen and (max-width : 399px),
+only screen and (max-device-width : 399px){
+    #plotGarden {
+        width: 200px;
+    }
+}
+*/

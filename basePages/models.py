@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
+from forum.models import Comment
+from django.contrib.contenttypes import generic
 
 # Create your models here.
 #Article Class each update.
@@ -13,6 +15,7 @@ class Article(models.Model):
     viewcount = models.PositiveIntegerField()
     subjectStream = models.ForeignKey('SubjectStream', null=True)
     abstract = models.TextField(null=True)
+    comment = generic.GenericRelation(Comment)
     
     def __str__(self):
         return '%i %i %i %s' % (self.pubDate.year, self.pubDate.month, self.pubDate.day, self.title)
@@ -25,6 +28,10 @@ class Article(models.Model):
         super(Article, self).save()
         self.slug = '%i/%i/%i/%s' % (self.pubDate.year, self.pubDate.month, self.pubDate.day, slugify(self.title))
         super(Article, self).save()
+        
+    @property
+    def sorted_comments_date(self):
+        return self.comment.order_by('pubDate')
 
 #class to manage the updating of each article    
 class ChangeLog(models.Model):

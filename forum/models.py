@@ -18,8 +18,8 @@ class Comment(models.Model):
     #Need to add relations to other models classes.
     comments = generic.GenericRelation('self')
     #start anchor and end anchor (end possibly not needed). Actually depends on type.
-    start = models.FloatField(blank=True)
-    end = models.FloatField(blank=True)
+    start = models.FloatField(blank=True, null=True)
+    end = models.FloatField(blank=True, null=True)
     #Enrichment comment or just a basic comment.
     isBasic = models.BooleanField()
 
@@ -46,6 +46,7 @@ class Comment(models.Model):
         sjson = {'id' : self.id, 'title' : self.title, 'comment' : self.comment, 'content_type' : self.content_type.name, 'object_id' : self.object_id, 'start' : self.start, 'end' : self.end, 'isBasic' : self.isBasic, 'previd' : self.get_earlier_id()}
         return sjson
     
+   
     class Meta:
         ordering = ["-start"]
 #admin class for posters
